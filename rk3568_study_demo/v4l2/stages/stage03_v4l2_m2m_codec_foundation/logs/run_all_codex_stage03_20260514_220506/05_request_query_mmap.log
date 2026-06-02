@@ -1,0 +1,13 @@
+S_FMT type=2 ok: 64x64 fourcc=RGB3 bytesperline=192 sizeimage=12288
+S_FMT type=1 ok: 64x64 fourcc=RGB3 bytesperline=192 sizeimage=12288
+REQBUFS type=2 ok: requested=2 granted=2
+REQBUFS type=1 ok: requested=2 granted=2
+QUERYBUF+MMAP type=2 idx=0 ok: length=12288 offset=0
+QUERYBUF+MMAP type=2 idx=1 ok: length=12288 offset=12288
+QUERYBUF+MMAP type=1 idx=0 ok: length=12288 offset=1073741824
+QUERYBUF+MMAP type=1 idx=1 ok: length=12288 offset=1073754112
+[demo05] PASS: REQBUFS+QUERYBUF+MMAP done. out=2 cap=2
+munmap idx=0 length=12288
+munmap idx=1 length=12288
+munmap idx=0 length=12288
+munmap idx=1 length=12288

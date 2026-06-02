@@ -1,0 +1,2 @@
+poll ret=1 revents=0x8 timeout_ms=80
+[demo08] INFO: poll got event (ret=1), environment has pending events.

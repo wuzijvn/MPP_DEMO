@@ -1,0 +1,20 @@
+rkisp-statistics (platform: rkisp):
+	/dev/video8
+	/dev/video9
+
+rkisp_mainpath (platform:rkisp-vir0):
+	/dev/video0
+	/dev/video1
+	/dev/video2
+	/dev/video3
+	/dev/video4
+	/dev/video5
+	/dev/video6
+	/dev/video7
+	/dev/media0
+
+HD camera : HD camera  (usb-fd800000.usb-1):
+	/dev/video10
+	/dev/video11
+	/dev/media1
+

@@ -1,0 +1,2 @@
+[demo06] saved first YUV420P frame to ./logs/demo06_first_frame.yuv (...x...)
+[demo06] PASS

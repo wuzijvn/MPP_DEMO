@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-05-19T14:39:27+0800",
+  "pass": false,
+  "fail_reason": "open input_annexb failed: ../samples/sample_720p_h264.annexb",
+  "config": {
+    "dev": "/dev/video0",
+    "width": 1280,
+    "height": 720,
+    "out_count": 4,
+    "cap_count": 4,
+    "timeout_ms": 200,
+    "loops": 8,
+    "output_bytesused": 16,
+    "max_input_chunks": 8,
+    "input_annexb": "../samples/sample_720p_h264.annexb",
+    "mplane": false,
+    "inject_timeout": false,
+    "inject_source_change": false,
+    "inject_dqbuf_eagain": false
+  },
+  "stats": {
+    "qbuf_out": 0,
+    "qbuf_cap": 0,
+    "dqbuf_out_ok": 0,
+    "dqbuf_cap_ok": 0,
+    "dqbuf_eagain": 0,
+    "poll_timeout": 0,
+    "source_change": 0,
+    "eos_count": 0,
+    "payload_bytes_total": 0,
+    "payload_chunks_total": 0,
+    "real_payload_mode": 0,
+    "state_transition": 6
+  }
+}

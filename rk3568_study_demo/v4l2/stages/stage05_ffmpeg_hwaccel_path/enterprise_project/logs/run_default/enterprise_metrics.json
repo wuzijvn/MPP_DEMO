@@ -1,0 +1,33 @@
+{
+  "input": "../samples/sample.mp4",
+  "decoder": "h264_rkmpp",
+  "hw_type": "",
+  "hw_type_set": false,
+  "device": "",
+  "max_frames": 120,
+  "inject": {
+    "device_create_fail": false,
+    "force_sw_fallback": false,
+    "transfer_fail": false,
+    "missing_hwfmt": false
+  },
+  "stats": {
+    "state_transition": 6,
+    "packet_read": 361,
+    "packet_sent": 124,
+    "frame_recv": 120,
+    "frame_hw": 0,
+    "frame_cpu_visible": 120,
+    "hw_transfer_ok": 0,
+    "hw_transfer_fail": 0,
+    "fallback_count": 0,
+    "err_count": 0,
+    "first_pts": 1,
+    "last_pts": 119
+  },
+  "final_state": "Stopped",
+  "gate": {
+    "pass": true,
+    "reason": "pass"
+  }
+}

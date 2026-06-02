@@ -1,0 +1,9 @@
+2026-05-19T14:39:27+0800 [INFO] enterprise stage03 start: dev=/dev/video0 loops=8 timeout_ms=200 input_annexb=../samples/sample_720p_h264.annexb output_bytesused=16 max_input_chunks=8 inject_timeout=0 inject_source_change=0 inject_dqbuf_eagain=0
+2026-05-19T14:39:27+0800 [INFO] open ok: dev=/dev/video0 fd=4
+2026-05-19T14:39:27+0800 [INFO] querycap ok: driver=vim2m card=vim2m bus=platform:vim2m caps=0x84208000 device_caps=0x4208000
+2026-05-19T14:39:27+0800 [INFO] set format ok: 1280x720 mplane=0
+2026-05-19T14:39:27+0800 [INFO] reqbufs ok: out=4 cap=4
+2026-05-19T14:39:27+0800 [INFO] streamon ok: out_type=2 cap_type=1
+2026-05-19T14:39:27+0800 [INFO] summary: state=FAILED transitions=6 qbuf_out=0 qbuf_cap=0 dq_out_ok=0 dq_cap_ok=0 dq_eagain=0 poll_timeout=0 source_change=0 eos=0 real_payload_mode=0 payload_chunks=0 payload_bytes=0
+2026-05-19T14:39:27+0800 [INFO] driver_shadow: userspace stage maps to driver s_fmt/reqbufs/qbuf/dqbuf/streamon/streamoff, and SOURCE_CHANGE requires CAPTURE reconfigure contract.
+2026-05-19T14:39:27+0800 [ERROR] gate fail: open input_annexb failed: ../samples/sample_720p_h264.annexb

@@ -1,0 +1,8 @@
+[hwtypes] available hw device types from FFmpeg build:
+  - drm
+  - opencl
+[demo01] decoder=h264_rkmpp id=27
+[demo01] hw configs for decoder:
+  - idx=0 device=(null) pix_fmt=drm_prime methods=0x4
+  - idx=1 device=(null) pix_fmt=yuv420p methods=0x4
+[demo01] PASS

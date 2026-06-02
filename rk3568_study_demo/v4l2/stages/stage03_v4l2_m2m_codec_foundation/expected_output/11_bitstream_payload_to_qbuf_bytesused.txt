@@ -1,0 +1,12 @@
+[demo11] bitstream payload to QBUF bytesused bridge
+[demo11] source=built-in synthetic h264 Annex B teaching stream
+[demo11] codec=h264 input_bytes=... max_output_bytes=0
+[demo11] nalu[0]: range=[...] start_code=4 payload_bytes=... buffer_bytes=... type=7(SPS)
+[demo11] qbuf_plan[0.0]: copy [...] -> OUTPUT buffer; set bytesused=...
+[demo11] nalu[1]: ... type=8(PPS)
+[demo11] nalu[2]: ... type=5(IDR slice)
+[demo11] nalu[3]: ... type=1(non-IDR slice)
+[demo11] summary: nal_count=4 total_qbuf_bytes=...
+[demo11] boundary: this demo does not call VIDIOC_QBUF and does not prove hardware decode.
+[demo11] driver_shadow: after OUTPUT QBUF, the driver/firmware consumes these bytes...
+[demo11] PASS

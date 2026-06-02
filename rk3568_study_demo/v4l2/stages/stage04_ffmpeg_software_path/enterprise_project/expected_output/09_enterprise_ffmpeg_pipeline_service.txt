@@ -1,0 +1,7 @@
+[state] INIT -> INPUT_OPENED reason=open input ok
+[state] INPUT_OPENED -> STREAM_READY reason=stream info ready
+[state] STREAM_READY -> DECODER_READY reason=decoder open ok
+[state] DECODER_READY -> DECODING reason=decode loop start
+[state] DECODING -> COMPLETED reason=decode finished
+[enterprise09] summary: packet_in=... frame_out=... error_count=... state_transition=... elapsed_s=... fps=...
+[enterprise09] result=PASS

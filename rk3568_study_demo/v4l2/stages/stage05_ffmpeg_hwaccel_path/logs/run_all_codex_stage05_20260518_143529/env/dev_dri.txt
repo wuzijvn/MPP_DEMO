@@ -1,0 +1,4 @@
+总用量 0
+drwxr-xr-x  2 root root         80 May 13 18:08 by-path
+crw-rw----+ 1 root video  226,   0 May 13 21:10 card0
+crw-rw----+ 1 root render 226, 128 May 13 18:08 renderD128

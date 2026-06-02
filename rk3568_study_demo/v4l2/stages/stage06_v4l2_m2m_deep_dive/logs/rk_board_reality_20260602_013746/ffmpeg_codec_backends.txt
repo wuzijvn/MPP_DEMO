@@ -1,0 +1,25 @@
+ V....D av1                  Alliance for Open Media AV1
+ V..... av1_rkmpp            Rockchip MPP (Media Process Platform) AV1 decoder (codec av1)
+ V..... h263_v4l2m2m         V4L2 mem2mem H.263 decoder wrapper (codec h263)
+ V..... h263_rkmpp           Rockchip MPP (Media Process Platform) H263 decoder (codec h263)
+ VFS..D h264                 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10
+ V..... h264_v4l2m2m         V4L2 mem2mem H.264 decoder wrapper (codec h264)
+ V..... h264_rkmpp           Rockchip MPP (Media Process Platform) H264 decoder (codec h264)
+ VFS..D hevc                 HEVC (High Efficiency Video Coding)
+ V..... hevc_rkmpp           Rockchip MPP (Media Process Platform) HEVC decoder (codec hevc)
+ V..... hevc_v4l2m2m         V4L2 mem2mem HEVC decoder wrapper (codec hevc)
+ V..... mjpeg_rkmpp          Rockchip MPP (Media Process Platform) MJPEG decoder (codec mjpeg)
+ V..... mpeg1_v4l2m2m        V4L2 mem2mem MPEG1 decoder wrapper (codec mpeg1video)
+ V..... mpeg1_rkmpp          Rockchip MPP (Media Process Platform) MPEG1VIDEO decoder (codec mpeg1video)
+ V..... mpeg2_v4l2m2m        V4L2 mem2mem MPEG2 decoder wrapper (codec mpeg2video)
+ V..... mpeg2_rkmpp          Rockchip MPP (Media Process Platform) MPEG2VIDEO decoder (codec mpeg2video)
+ V..... mpeg4_v4l2m2m        V4L2 mem2mem MPEG4 decoder wrapper (codec mpeg4)
+ V..... mpeg4_rkmpp          Rockchip MPP (Media Process Platform) MPEG4 decoder (codec mpeg4)
+ V..... vc1_v4l2m2m          V4L2 mem2mem VC1 decoder wrapper (codec vc1)
+ VFS..D vp8                  On2 VP8
+ V..... vp8_rkmpp            Rockchip MPP (Media Process Platform) VP8 decoder (codec vp8)
+ V..... vp8_v4l2m2m          V4L2 mem2mem VP8 decoder wrapper (codec vp8)
+ VFS..D vp9                  Google VP9
+ V..... vp9_rkmpp            Rockchip MPP (Media Process Platform) VP9 decoder (codec vp9)
+ V..... vp9_v4l2m2m          V4L2 mem2mem VP9 decoder wrapper (codec vp9)
+ A....D wmav1                Windows Media Audio 1

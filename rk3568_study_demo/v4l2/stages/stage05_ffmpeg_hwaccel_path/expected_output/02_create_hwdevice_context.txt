@@ -1,0 +1,5 @@
+[demo02] hw device created: type=drm device=/dev/dri/renderD128
+[demo02] PASS
+# 若失败：
+# [demo02] av_hwdevice_ctx_create failed: ...
+# [demo02] hint: check /dev/dri/renderD* or backend-specific device.

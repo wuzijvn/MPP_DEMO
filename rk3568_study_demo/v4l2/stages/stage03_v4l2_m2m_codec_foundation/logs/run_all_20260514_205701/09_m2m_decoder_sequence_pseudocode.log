@@ -1,0 +1,7 @@
+[demo09] m2m decoder sequence pseudocode (runnable printer)
+open -> QUERYCAP -> ENUM_FMT -> S_FMT(OUTPUT/CAPTURE)
+REQBUFS -> QUERYBUF -> MMAP -> QBUF(CAPTURE/OUTPUT)
+STREAMON both -> poll -> DQBUF/QBUF loop
+handle SOURCE_CHANGE -> CAPTURE reconfigure
+handle EOS/drain -> STREAMOFF -> munmap -> close
+[demo09] PASS

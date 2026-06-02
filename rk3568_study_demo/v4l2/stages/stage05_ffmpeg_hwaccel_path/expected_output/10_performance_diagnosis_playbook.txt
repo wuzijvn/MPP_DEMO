@@ -1,0 +1,19 @@
+[demo10] performance diagnosis playbook
+[demo10] step1 baseline: compare decoder=h264 vs decoder=h264_rkmpp
+[demo10] step2 evidence: collect verdict + frame counters from demo04 summary
+[demo10] step3 timing: collect real/user/sys/cpu_pct/maxrss by /usr/bin/time
+[demo10] step4 kernel shadow: collect dmesg media snapshot for each run
+[demo10] step5 ranking: optimize only after bottleneck is proven
+[demo10] log_dir=./logs/10_performance_diagnosis_YYYYmmdd_HHMMSS
+[demo10] input=./samples/sample.mp4
+[demo10] max_frames=120
+[demo10] loops=5
+[demo10] time_mode=gnu|bash
+[demo10] running cases...
+[demo10] summary: ./logs/10_performance_diagnosis_YYYYmmdd_HHMMSS/summary.csv
+[demo10] quick view:
+case,run_id,cmd_status,real_sec,user_sec,sys_sec,cpu_pct,maxrss_kb,decoder,hw_type,hw_frames,wrapper_frames,sw_fallback_frames,fallback,verdict
+sw_baseline_h264,1,0,...
+rkmpp_wrapper_default,1,0,...
+...
+[demo10] PASS

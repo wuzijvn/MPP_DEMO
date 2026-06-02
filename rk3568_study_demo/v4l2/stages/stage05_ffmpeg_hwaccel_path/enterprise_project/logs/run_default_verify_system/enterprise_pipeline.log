@@ -1,0 +1,10 @@
+[2026-05-26 09:35:56][INFO] stage05 enterprise start input=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage05_ffmpeg_hwaccel_path/enterprise_project/../samples/sample.mp4 decoder=h264_rkmpp hw_type=(not-forced) device=(auto) max_frames=4
+[2026-05-26 09:35:56][INFO] inject flags device_fail=0 force_sw=0 transfer_fail=0 missing_hwfmt=0
+[2026-05-26 09:35:56][INFO] wrapper mode: no hw_type forced; decoder wrapper is the primary evidence path
+[2026-05-26 09:35:56][INFO] progress frame=1 hw=0 sw=1 transfer_ok=0 transfer_fail=0
+[2026-05-26 09:35:56][INFO] progress frame=2 hw=0 sw=2 transfer_ok=0 transfer_fail=0
+[2026-05-26 09:35:56][INFO] progress frame=3 hw=0 sw=3 transfer_ok=0 transfer_fail=0
+[2026-05-26 09:35:56][INFO] progress frame=4 hw=0 sw=4 transfer_ok=0 transfer_fail=0
+[2026-05-26 09:35:56][INFO] summary final_state=Stopped transitions=6 packet_read=9 packet_sent=5 frame_recv=4 hw=0 sw=4 transfer_ok=0 transfer_fail=0 fallback_count=0 err_count=0
+[2026-05-26 09:35:56][INFO] driver_shadow: default RKMPP wrapper evidence is decoder selection plus decoded frames; explicit hwdevice mode may map to /dev/dri/renderD* or backend-specific nodes, and fallback often comes from hwfmt/device negotiation failure.
+[2026-05-26 09:35:56][INFO] gate pass

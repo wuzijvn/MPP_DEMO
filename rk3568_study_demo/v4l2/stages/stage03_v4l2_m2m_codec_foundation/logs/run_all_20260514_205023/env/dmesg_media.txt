@@ -1,0 +1,24 @@
+[    0.150507] ACPI: Added _OSI(Linux-Dell-Video)
+[    0.265841] pci 0000:00:0f.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+[    1.769396] systemd[1]: Starting Load Kernel Module drm...
+[    1.781341] systemd[1]: modprobe@drm.service: Succeeded.
+[    1.782092] systemd[1]: Finished Load Kernel Module drm.
+[    1.843261] vmwgfx 0000:00:0f.0: [drm] FIFO at 0x00000000fe000000 size is 8192 kiB
+[    1.843272] vmwgfx 0000:00:0f.0: [drm] VRAM at 0x00000000e8000000 size is 131072 kiB
+[    1.843285] vmwgfx 0000:00:0f.0: [drm] Running on SVGA version 2.
+[    1.843291] vmwgfx 0000:00:0f.0: [drm] DMA map mode: Caching DMA mappings.
+[    1.843916] vmwgfx 0000:00:0f.0: [drm] Legacy memory limits: VRAM = 4096 kB, FIFO = 256 kB, surface = 0 kB
+[    1.843917] vmwgfx 0000:00:0f.0: [drm] MOB limits: max mob size = 1048576 kB, max mob pages = 2097152
+[    1.843918] vmwgfx 0000:00:0f.0: [drm] Capabilities: rect copy, cursor, cursor bypass, cursor bypass 2, 8bit emulation, alpha cursor, 3D, extended fifo, multimon, pitchlock, irq mask, display topology, gmr, traces, gmr2, screen object 2, command buffers, command buffers 2, gbobject, dx, hp cmd queue, no bb restriction, cap2 register, 
+[    1.843919] vmwgfx 0000:00:0f.0: [drm] Capabilities2: grow otable, intra surface copy, dx2, gb memsize 2, screendma reg, otable ptdepth2, non ms to ms stretchblt, cursor mob, mshint, cb max size 4mb, dx3, frame type, trace full fb, extra regs, lo staging, 
+[    1.843920] vmwgfx 0000:00:0f.0: [drm] Max GMR ids is 64
+[    1.843921] vmwgfx 0000:00:0f.0: [drm] Max number of GMR pages is 65536
+[    1.843921] vmwgfx 0000:00:0f.0: [drm] Maximum display memory size is 262144 kiB
+[    1.848043] vmwgfx 0000:00:0f.0: [drm] Screen Target display unit initialized
+[    1.848641] vmwgfx 0000:00:0f.0: [drm] Fifo max 0x00040000 min 0x00001000 cap 0x0000077f
+[    1.849017] vmwgfx 0000:00:0f.0: [drm] Using command buffers with DMA pool.
+[    1.849021] vmwgfx 0000:00:0f.0: [drm] Available shader model: SM_5.
+[    1.851023] fbcon: svgadrmfb (fb0) is primary device
+[    1.856191] [drm] Initialized vmwgfx 2.19.0 20210722 for 0000:00:0f.0 on minor 0
+[79560.857373] videodev: Linux video capture interface: v2.00
+[79560.877781] vim2m vim2m.0: Device registered as /dev/video0

@@ -1,0 +1,9 @@
+S_FMT type=2 ok: 64x64 fourcc=RGB3 bytesperline=192 sizeimage=12288
+S_FMT type=1 ok: 64x64 fourcc=RGB3 bytesperline=192 sizeimage=12288
+REQBUFS type=2 ok: requested=2 granted=2
+REQBUFS type=1 ok: requested=2 granted=2
+STREAMON type=2 ok
+STREAMON type=1 ok
+STREAMOFF type=1 ok
+STREAMOFF type=2 ok
+[demo07] PASS: STREAMON/STREAMOFF both queues done. out=2 cap=2

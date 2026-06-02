@@ -1,0 +1,1 @@
+./scripts/collect_env.sh: 行 12: ffmpeg：未找到命令

@@ -1,0 +1,8 @@
+[demo07] step1 open ok
+[demo07] step2 stream info ok
+[demo07] step3 decoder open ok
+[demo07] step4 packet/frame alloc ok
+[demo07] PASS
+# 注入时：
+# [demo07] inject fail at stepN
+# [demo07] FAIL path cleanup done

@@ -1,0 +1,44 @@
+Driver Info:
+	Driver name      : vim2m
+	Card type        : vim2m
+	Bus info         : platform:vim2m
+	Driver version   : 5.15.178
+	Capabilities     : 0x84208000
+		Video Memory-to-Memory
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+	Device Caps      : 0x04208000
+		Video Memory-to-Memory
+		Streaming
+		Extended Pix Format
+Priority: 2
+Format Video Capture:
+	Width/Height      : 640/480
+	Pixel Format      : 'RGBP' (16-bit RGB 5-6-5)
+	Field             : None
+	Bytes per Line    : 1280
+	Size Image        : 614400
+	Colorspace        : Rec. 709
+	Transfer Function : Default (maps to Rec. 709)
+	YCbCr/HSV Encoding: Default (maps to Rec. 709)
+	Quantization      : Default (maps to Full Range)
+	Flags             : 
+Format Video Output:
+	Width/Height      : 640/480
+	Pixel Format      : 'RGBP' (16-bit RGB 5-6-5)
+	Field             : None
+	Bytes per Line    : 1280
+	Size Image        : 614400
+	Colorspace        : Rec. 709
+	Transfer Function : Default (maps to Rec. 709)
+	YCbCr/HSV Encoding: Default (maps to Rec. 709)
+	Quantization      : Default (maps to Full Range)
+	Flags             : 
+
+User Controls
+
+                horizontal_flip 0x00980914 (bool)   : default=0 value=0
+                  vertical_flip 0x00980915 (bool)   : default=0 value=0
+          transaction_time_msec 0x00981900 (int)    : min=1 max=10001 step=1 default=40 value=40
+        buffers_per_transaction 0x00981901 (int)    : min=1 max=32 step=1 default=1 value=1

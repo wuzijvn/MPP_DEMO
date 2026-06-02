@@ -1,0 +1,11 @@
+stage03: m2m-preflight backend=sim dev=/dev/video0
+Stage03 preflight: find one V4L2 M2M node
+dev=/dev/video0 open=1 querycap=1 m2m=1 codec_like=0 virtual_test=1
+driver=vim2m card=vim2m
+  OUTPUT formats: RGBP RGBR RGB3 BGR3
+  CAPTURE formats: RGBP RGBR RGB3 BGR3 YUYV BA81 GBRG GRBG RGGB
+
+Meaning:
+  OUTPUT queue: decoder input side. Real decoder usually accepts H264/HEVC here.
+  CAPTURE queue: decoder output side. Real decoder usually produces NV12/YUV here.
+  vim2m/vicodec/vivid are learning drivers, not proof of SoC hardware codec.

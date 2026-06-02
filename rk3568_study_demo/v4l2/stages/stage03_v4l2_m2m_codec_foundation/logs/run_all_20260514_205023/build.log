@@ -1,0 +1,7 @@
+[build] 04_try_set_format.cpp -> 04_try_set_format
+[build] 05_request_query_mmap_buffers.cpp -> 05_request_query_mmap_buffers
+[build] 06_qbuf_dqbuf_ownership.cpp -> 06_qbuf_dqbuf_ownership
+[build] 07_streamon_streamoff.cpp -> 07_streamon_streamoff
+[build] 08_poll_timeout.cpp -> 08_poll_timeout
+[build] 10_source_change_eos_drain_note.cpp -> 10_source_change_eos_drain_note
+[build] stage03_v4l2_m2m_codec_foundation_main.cpp -> stage03_v4l2_m2m_codec_foundation_main

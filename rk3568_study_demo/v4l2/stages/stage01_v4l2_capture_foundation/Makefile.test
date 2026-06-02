@@ -1,0 +1,27 @@
+# 单元测试 Makefile
+CXX = g++
+CXXFLAGS = -std=c++11 -Wall -Wextra -pthread
+GTEST_DIR = /usr/src/gtest
+GTEST_CFLAGS = -isystem ${GTEST_DIR}/include -pthread
+GTEST_LIBS = -lgtest -lgtest_main -lpthread
+
+# 测试源文件
+TEST_SRC = test_stage01_v4l2_capture.cpp
+TEST_TARGET = test_stage01_v4l2_capture
+
+# 头文件路径
+INCLUDES = -I.
+
+# 编译测试
+$(TEST_TARGET): $(TEST_SRC)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(GTEST_CFLAGS) $< -o $@ $(GTEST_LIBS)
+
+# 运行测试
+run-test: $(TEST_TARGET)
+	./$(TEST_TARGET)
+
+# 清理测试
+clean-test:
+	rm -f $(TEST_TARGET)
+
+.PHONY: run-test clean-test

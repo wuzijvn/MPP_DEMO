@@ -1,0 +1,33 @@
+{
+  "input": "/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage05_ffmpeg_hwaccel_path/enterprise_project/../samples/sample.mp4",
+  "decoder": "h264_rkmpp",
+  "hw_type": "",
+  "hw_type_set": false,
+  "device": "",
+  "max_frames": 4,
+  "inject": {
+    "device_create_fail": false,
+    "force_sw_fallback": false,
+    "transfer_fail": false,
+    "missing_hwfmt": false
+  },
+  "stats": {
+    "state_transition": 6,
+    "packet_read": 9,
+    "packet_sent": 5,
+    "frame_recv": 4,
+    "frame_hw": 0,
+    "frame_sw": 4,
+    "hw_transfer_ok": 0,
+    "hw_transfer_fail": 0,
+    "fallback_count": 0,
+    "err_count": 0,
+    "first_pts": 1,
+    "last_pts": 3
+  },
+  "final_state": "Stopped",
+  "gate": {
+    "pass": true,
+    "reason": "pass"
+  }
+}

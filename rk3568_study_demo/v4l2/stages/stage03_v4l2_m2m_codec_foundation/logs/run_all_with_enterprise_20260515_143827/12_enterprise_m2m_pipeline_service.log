@@ -1,0 +1,33 @@
+[build] 12_enterprise_m2m_pipeline_service
+[build] done
+[run12] app=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage03_v4l2_m2m_codec_foundation/enterprise_project/bin/12_enterprise_m2m_pipeline_service
+[run12] log_dir=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage03_v4l2_m2m_codec_foundation/logs/12_enterprise_20260515_143829
+2026-05-15T14:38:29+0800 [INFO] enterprise stage03 start: dev=/dev/video0 loops=8 timeout_ms=200 inject_timeout=0 inject_source_change=0 inject_dqbuf_eagain=0
+[state] INIT -> DEVICE_OPENED reason=enter service bootstrap
+[state] DEVICE_OPENED -> CAPS_QUERIED reason=prepare querycap stage
+[state] CAPS_QUERIED -> FORMATS_SET reason=prepare format stage
+[state] FORMATS_SET -> BUFFERS_REQUESTED reason=prepare vb2 queue stage
+[state] BUFFERS_REQUESTED -> STREAMING reason=prepare streaming stage
+2026-05-15T14:38:29+0800 [INFO] open ok: dev=/dev/video0 fd=4
+2026-05-15T14:38:29+0800 [INFO] querycap ok: driver=vim2m card=vim2m bus=platform:vim2m caps=0x84208000 device_caps=0x4208000
+2026-05-15T14:38:29+0800 [INFO] set format ok: 1280x720 mplane=0
+2026-05-15T14:38:29+0800 [INFO] reqbufs ok: out=4 cap=4
+2026-05-15T14:38:29+0800 [INFO] streamon ok: out_type=2 cap_type=1
+2026-05-15T14:38:29+0800 [INFO] loop=0 qbuf_out=1 qbuf_cap=1 dq_out_ok=1 dq_cap_ok=1
+2026-05-15T14:38:29+0800 [INFO] loop=1 qbuf_out=2 qbuf_cap=2 dq_out_ok=2 dq_cap_ok=2
+2026-05-15T14:38:29+0800 [INFO] loop=2 qbuf_out=3 qbuf_cap=3 dq_out_ok=3 dq_cap_ok=3
+2026-05-15T14:38:29+0800 [INFO] loop=3 qbuf_out=4 qbuf_cap=4 dq_out_ok=4 dq_cap_ok=4
+2026-05-15T14:38:29+0800 [INFO] loop=4 qbuf_out=5 qbuf_cap=5 dq_out_ok=5 dq_cap_ok=5
+2026-05-15T14:38:29+0800 [INFO] loop=5 qbuf_out=6 qbuf_cap=6 dq_out_ok=6 dq_cap_ok=6
+2026-05-15T14:38:29+0800 [INFO] loop=6 qbuf_out=7 qbuf_cap=7 dq_out_ok=7 dq_cap_ok=7
+2026-05-15T14:38:29+0800 [INFO] loop=7 qbuf_out=8 qbuf_cap=8 dq_out_ok=8 dq_cap_ok=8
+2026-05-15T14:38:29+0800 [INFO] drain begin: send EOS on OUTPUT then wait CAPTURE flush complete
+2026-05-15T14:38:29+0800 [INFO] streamoff ok: out_type=2 cap_type=1
+[state] STREAMING -> DRAINING reason=service finished and enters drain
+[state] DRAINING -> STOPPED reason=graceful stop
+2026-05-15T14:38:29+0800 [INFO] summary: state=STOPPED transitions=7 qbuf_out=8 qbuf_cap=8 dq_out_ok=8 dq_cap_ok=8 dq_eagain=0 poll_timeout=0 source_change=0 eos=1
+2026-05-15T14:38:29+0800 [INFO] driver_shadow: userspace stage maps to driver s_fmt/reqbufs/qbuf/dqbuf/streamon/streamoff, and SOURCE_CHANGE requires CAPTURE reconfigure contract.
+2026-05-15T14:38:29+0800 [INFO] gate pass
+[enterprise] log=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage03_v4l2_m2m_codec_foundation/logs/12_enterprise_20260515_143829/enterprise_pipeline.log
+[enterprise] metrics=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage03_v4l2_m2m_codec_foundation/logs/12_enterprise_20260515_143829/enterprise_metrics.json
+[enterprise] result=PASS

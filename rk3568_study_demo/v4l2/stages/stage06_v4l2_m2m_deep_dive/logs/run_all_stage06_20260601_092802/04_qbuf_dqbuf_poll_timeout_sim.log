@@ -1,0 +1,45 @@
+Stage06 Demo04: QBUF/DQBUF + poll timeout simulation
+frames             : 8
+timeout_at         : 5
+recover            : yes
+
+[frame 1] QBUF OUTPUT, output_depth=1
+[frame 1] QBUF CAPTURE, capture_depth=1
+[frame 1] DQBUF OUTPUT + CAPTURE, output_depth=0, capture_depth=0
+[frame 2] QBUF OUTPUT, output_depth=1
+[frame 2] QBUF CAPTURE, capture_depth=1
+[frame 2] DQBUF OUTPUT + CAPTURE, output_depth=0, capture_depth=0
+[frame 3] QBUF OUTPUT, output_depth=1
+[frame 3] QBUF CAPTURE, capture_depth=1
+[frame 3] DQBUF OUTPUT + CAPTURE, output_depth=0, capture_depth=0
+[frame 4] QBUF OUTPUT, output_depth=1
+[frame 4] QBUF CAPTURE, capture_depth=1
+[frame 4] DQBUF OUTPUT + CAPTURE, output_depth=0, capture_depth=0
+[frame 5] QBUF OUTPUT, output_depth=1
+[frame 5] QBUF CAPTURE, capture_depth=1
+[frame 5] poll timeout: no completed CAPTURE buffer before deadline
+           layer hint: bitstream/header/bytesused/IRQ/runtime-PM/firmware/job scheduling
+           recovery: STREAMOFF both queues -> drain logs -> STREAMON and requeue buffers
+[frame 6] QBUF OUTPUT, output_depth=1
+[frame 6] QBUF CAPTURE, capture_depth=1
+[frame 6] DQBUF OUTPUT + CAPTURE, output_depth=0, capture_depth=0
+[frame 7] QBUF OUTPUT, output_depth=1
+[frame 7] QBUF CAPTURE, capture_depth=1
+[frame 7] DQBUF OUTPUT + CAPTURE, output_depth=0, capture_depth=0
+[frame 8] QBUF OUTPUT, output_depth=1
+[frame 8] QBUF CAPTURE, capture_depth=1
+[frame 8] DQBUF OUTPUT + CAPTURE, output_depth=0, capture_depth=0
+
+性能/稳定性观察指标：
+max_output_depth             = 1
+max_capture_depth            = 1
+qbuf_output                  = 8
+qbuf_capture                 = 8
+dqbuf_output                 = 7
+dqbuf_capture                = 7
+poll_calls                   = 8
+timeout_count                = 1
+source_change_count          = 0
+eos_count                    = 0
+recovery_count               = 1
+verdict=TIMEOUT_DETECTED_AND_RECOVERED

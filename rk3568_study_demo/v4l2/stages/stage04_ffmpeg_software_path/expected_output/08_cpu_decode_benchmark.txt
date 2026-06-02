@@ -1,0 +1,3 @@
+[demo08] benchmark: frames=... elapsed_s=... fps=...
+[demo08] note: this is software decode baseline, not hardware path
+[demo08] PASS

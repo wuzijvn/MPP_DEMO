@@ -1,0 +1,11 @@
+case,run_id,cmd_status,real_sec,user_sec,sys_sec,cpu_pct,maxrss_kb,decoder,hw_type,hw_frames,wrapper_frames,sw_fallback_frames,fallback,verdict
+sw_baseline_h264,1,0,1.247,1.247,1.247,1.247,1.247,h264,(not-forced),0,0,120,1,SOFTWARE_FALLBACK
+rkmpp_wrapper_default,1,0,0.447,0.447,0.447,0.447,0.447,h264_rkmpp,(not-forced),0,120,0,0,HARDWARE_DECODE_WRAPPER_OUTPUT
+sw_baseline_h264,2,0,1.222,1.222,1.222,1.222,1.222,h264,(not-forced),0,0,120,1,SOFTWARE_FALLBACK
+rkmpp_wrapper_default,2,0,0.456,0.456,0.456,0.456,0.456,h264_rkmpp,(not-forced),0,120,0,0,HARDWARE_DECODE_WRAPPER_OUTPUT
+sw_baseline_h264,3,0,1.173,1.173,1.173,1.173,1.173,h264,(not-forced),0,0,120,1,SOFTWARE_FALLBACK
+rkmpp_wrapper_default,3,0,0.445,0.445,0.445,0.445,0.445,h264_rkmpp,(not-forced),0,120,0,0,HARDWARE_DECODE_WRAPPER_OUTPUT
+sw_baseline_h264,4,0,1.211,1.211,1.211,1.211,1.211,h264,(not-forced),0,0,120,1,SOFTWARE_FALLBACK
+rkmpp_wrapper_default,4,0,0.412,0.412,0.412,0.412,0.412,h264_rkmpp,(not-forced),0,120,0,0,HARDWARE_DECODE_WRAPPER_OUTPUT
+sw_baseline_h264,5,0,1.267,1.267,1.267,1.267,1.267,h264,(not-forced),0,0,120,1,SOFTWARE_FALLBACK
+rkmpp_wrapper_default,5,0,0.484,0.484,0.484,0.484,0.484,h264_rkmpp,(not-forced),0,120,0,0,HARDWARE_DECODE_WRAPPER_OUTPUT

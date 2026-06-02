@@ -1,0 +1,53 @@
+Stage06 Demo01: stateful decoder ioctl sequence map
+codec              : H264
+capture_raw        : NV12
+frames             : 4
+source_change_at   : 3
+
+id | userspace action                   | driver shadow                             | visible evidence
+---+------------------------------------+-------------------------------------------+------------------------------
+1  | open(/dev/videoX)                  | file_operations.open 创建 codec session  | fd >= 0
+2  | VIDIOC_QUERYCAP                    | 驱动返回 capabilities                  | capabilities 含 M2M/STREAMING
+3  | S_FMT OUTPUT H264                  | 压缩码流队列格式协商             | OUTPUT pixelformat=H264
+4  | S_FMT CAPTURE NV12                 | 解码帧队列格式协商                | CAPTURE pixelformat=NV12
+5  | REQBUFS/QUERYBUF/MMAP              | vb2 分配/准备 queue buffer             | 用户态获得 mmap 地址
+6  | QBUF OUTPUT bytesused>0            | 压缩 packet 所有权交给驱动        | OUTPUT queued
+7  | QBUF CAPTURE empty                 | 空 frame buffer 所有权交给驱动     | CAPTURE queued
+8  | STREAMON both queues               | v4l2-mem2mem 可调度 job                 | streaming=on
+9  | poll + DQBUF loop                  | IRQ/worker 完成后 wakeup                | DQBUF 返回 sequence/timestamp
+10 | SOURCE_CHANGE                      | 驱动提示分辨率/stride 改变        | 需要重配 CAPTURE
+11 | EOS/drain                          | 驱动排空内部 DPB/引用帧           | 最后一个 buffer 带 LAST
+12 | STREAMOFF + munmap + close         | 停止硬件 job 并释放 session         | 资源对称释放
+
+模拟 decode loop：
+[frame 1] QBUF OUTPUT compressed_packet bytesused>0 -> DRIVER
+[frame 1] QBUF CAPTURE empty_frame_buffer -> DRIVER
+[frame 1] poll waits for driver wakeup
+[frame 1] DQBUF OUTPUT done + DQBUF CAPTURE decoded_frame -> USER
+[frame 2] QBUF OUTPUT compressed_packet bytesused>0 -> DRIVER
+[frame 2] QBUF CAPTURE empty_frame_buffer -> DRIVER
+[frame 2] poll waits for driver wakeup
+[frame 2] DQBUF OUTPUT done + DQBUF CAPTURE decoded_frame -> USER
+[frame 3] QBUF OUTPUT compressed_packet bytesused>0 -> DRIVER
+[frame 3] QBUF CAPTURE empty_frame_buffer -> DRIVER
+[frame 3] poll waits for driver wakeup
+[frame 3] EVENT SOURCE_CHANGE: STREAMOFF CAPTURE -> REQBUFS new size -> STREAMON CAPTURE
+[frame 3] DQBUF OUTPUT done + DQBUF CAPTURE decoded_frame -> USER
+[frame 4] QBUF OUTPUT compressed_packet bytesused>0 -> DRIVER
+[frame 4] QBUF CAPTURE empty_frame_buffer -> DRIVER
+[frame 4] poll waits for driver wakeup
+[frame 4] DQBUF OUTPUT done + DQBUF CAPTURE decoded_frame -> USER
+
+关键计数器：
+qbuf_output                  = 4
+qbuf_capture                 = 4
+dqbuf_output                 = 4
+dqbuf_capture                = 4
+poll_calls                   = 4
+timeout_count                = 0
+source_change_count          = 1
+eos_count                    = 1
+recovery_count               = 1
+
+verdict=SEQUENCE_MAP_READY
+下一步：运行 02_format_negotiation_probe，观察 TRY_FMT/S_FMT 如何把请求格式变成驱动接受的格式。

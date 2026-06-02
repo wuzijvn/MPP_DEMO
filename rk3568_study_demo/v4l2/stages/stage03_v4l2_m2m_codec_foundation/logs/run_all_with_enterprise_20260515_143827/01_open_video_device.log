@@ -1,0 +1,2 @@
+[demo01] open success: dev=/dev/video0 fd=3
+[demo01] PASS: open video device done

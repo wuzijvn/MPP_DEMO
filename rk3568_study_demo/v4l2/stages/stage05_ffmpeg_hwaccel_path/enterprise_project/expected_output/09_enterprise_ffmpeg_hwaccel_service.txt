@@ -1,0 +1,3 @@
+[enterprise] log=.../enterprise_pipeline.log
+[enterprise] metrics=.../enterprise_metrics.json
+[enterprise] result=PASS|FAIL

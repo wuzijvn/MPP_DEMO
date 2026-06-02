@@ -1,0 +1,5 @@
+[demo03] decoder=h264_rkmpp
+[demo03] no --hw-type specified; skip AVHWDeviceContext hwfmt probe
+[demo03] note: rkmpp decoder wrapper can be valid even when decoder hw_config is empty.
+[demo03] PASS(wrapper-mode)
+[demo03] PASS

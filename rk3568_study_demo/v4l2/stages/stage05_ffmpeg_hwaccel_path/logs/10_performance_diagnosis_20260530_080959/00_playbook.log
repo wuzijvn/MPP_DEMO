@@ -1,0 +1,7 @@
+[demo10] performance diagnosis playbook
+[demo10] step1 baseline: compare decoder=h264 vs decoder=h264_rkmpp
+[demo10] step2 evidence: collect verdict + frame counters from demo04 summary
+[demo10] step3 timing: collect real/user/sys/cpu_pct/maxrss by /usr/bin/time
+[demo10] step4 kernel shadow: collect dmesg media snapshot for each run
+[demo10] step5 ranking: optimize only after bottleneck is proven
+[demo10] PASS

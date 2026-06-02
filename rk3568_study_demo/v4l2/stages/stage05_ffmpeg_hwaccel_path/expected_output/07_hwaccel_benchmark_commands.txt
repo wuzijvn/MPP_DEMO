@@ -1,0 +1,11 @@
+[demo07] benchmark command notebook
+[demo07] SW baseline example:
+  ffmpeg -benchmark -i input.mp4 -f null -
+[demo07] RKMPP HW decode example for RK3568:
+  ffmpeg -benchmark -c:v h264_rkmpp -i input.mp4 -f null -
+[demo07] explicit hwdevice experiment only when backend is known usable:
+  ffmpeg -benchmark -hwaccel drm -i input.mp4 -f null -
+[demo07] check fallback with debug logs:
+  ffmpeg -v debug ...
+[demo07] observation focus: fps/cpu + frame type evidence + backend negotiation logs
+[demo07] PASS

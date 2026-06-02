@@ -1,0 +1,6 @@
+[build] 01_decoder_ioctl_sequence_map.cpp -> 01_decoder_ioctl_sequence_map
+[build] 02_format_negotiation_probe.cpp -> 02_format_negotiation_probe
+[build] 03_mmap_buffer_lifecycle_sim.cpp -> 03_mmap_buffer_lifecycle_sim
+[build] 04_qbuf_dqbuf_poll_timeout_sim.cpp -> 04_qbuf_dqbuf_poll_timeout_sim
+[build] 05_source_change_eos_drain_sim.cpp -> 05_source_change_eos_drain_sim
+[build] 06_timeout_debug_report_template.cpp -> 06_timeout_debug_report_template

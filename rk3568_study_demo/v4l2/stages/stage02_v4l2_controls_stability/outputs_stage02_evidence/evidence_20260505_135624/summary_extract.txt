@@ -1,0 +1,23 @@
+================ stage02 summary ================
+config:
+  dev=/dev/video10 req=640x480 pixfmt=YUYV fps=30 timeout_ms=2000 req_bufs=4 duration_sec=10 total_frames=600
+  queue_depth=64 queue_policy=drop-oldest writer_delay_ms=0 dump_every=0 no_save=1 out_dir=../../../artifacts/stage02_outputs
+  recover_on_timeout=1 max_recoveries=3
+active format:
+  640x480 fourcc=YUYV bytesperline=1280 sizeimage=614400
+timing:
+  duration=10.162 s fps=4.921
+select:
+  calls=50 ready=50 timeout=0 eintr=0 error=0
+capture io:
+  dq_ok=50 dq_fail=0 dq_eagain=0 qbuf_ok=54 qbuf_fail=0
+error/recovery:
+  error_flag_frames=0 zero_bytes_frames=0 recoveries_attempted=0 recoveries_ok=0 recoveries_fail=0
+writer:
+  frames=50 bytes=30720000 dumped_files=0 dump_fail=0
+queue/backpressure:
+  peak_depth=0 dropped_oldest=0 blocked_waits=0
+host interval(ms): count=49 min=200.185 max=203.946 avg=202.455
+flags distribution:
+  0x00012001 => 50
+===============================================

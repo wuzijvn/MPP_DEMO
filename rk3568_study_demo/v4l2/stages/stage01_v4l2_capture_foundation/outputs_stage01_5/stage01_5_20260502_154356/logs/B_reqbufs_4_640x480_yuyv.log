@@ -1,0 +1,59 @@
+cmd: /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage01_v4l2_capture_foundation/bin/stage01_v4l2_capture_main /dev/video10 640 480 /tmp/b_4.yuyv /tmp/b_4.ppm 20 --warmup=3 --fps=30 --pixfmt=YUYV --timeout-ms=2000 --req-bufs=4 --no-save --log-every=10
+
+start capture with config:
+  dev=/dev/video10 req=640x480 pixfmt=YUYV raw=/tmp/b_4.yuyv ppm=/tmp/b_4.ppm frames=20 warmup=3 fps=30 timeout_ms=2000 req_bufs=4 dump_formats=0 inject=none inject_frame=120 save=0 log_every=10 trace_csv=(disabled)
+device info:
+  driver      : uvcvideo
+  card        : HD camera : HD camera 
+  bus_info    : usb-fd800000.usb-1
+  version     : 5.10.198
+  capabilities: 0x84a00001
+  device_caps : 0x04200001
+try fmt: req=640x480/YUYV -> driver-suggest=640x480/YUYV bytesperline=1280 sizeimage=614400
+format compare (request vs active S_FMT result vs G_FMT readback):
+  request : 640x480 fourcc=YUYV field=1
+  active(S_FMT): 640x480 fourcc=YUYV field=1 bytesperline=1280 sizeimage=614400
+  readback(G_FMT): 640x480 fourcc=YUYV field=1 bytesperline=1280 sizeimage=614400
+fps compare (request vs active S_PARM result vs G_PARM readback):
+  request fps: 30
+  active(S_PARM): tpf=1/30 => 30.000 fps
+  readback(G_PARM): tpf=1/30 => 30.000 fps
+frame=1 seq=0 index=0 bytesused=614400 ts=298178.517004 flags=0x00012001|TS_MONOTONIC|SRC_SOE
+frame=2 seq=1 index=1 bytesused=614400 ts=298178.717124 flags=0x00012001|TS_MONOTONIC|SRC_SOE
+frame=3 seq=2 index=2 bytesused=614400 ts=298178.921038 flags=0x00012001|TS_MONOTONIC|SRC_SOE
+frame=4 seq=3 index=3 bytesused=614400 ts=298179.124914 flags=0x00012001|TS_MONOTONIC|SRC_SOE
+frame=5 seq=4 index=0 bytesused=614400 ts=298179.324916 flags=0x00012001|TS_MONOTONIC|SRC_SOE
+frame=10 seq=9 index=1 bytesused=614400 ts=298180.337063 flags=0x00012001|TS_MONOTONIC|SRC_SOE
+frame=20 seq=19 index=3 bytesused=614400 ts=298182.361101 flags=0x00012001|TS_MONOTONIC|SRC_SOE
+
+================ capture summary ================
+config:
+  dev=/dev/video10 req=640x480 frames=20 warmup=3 req_fps=30 timeout_ms=2000 req_bufs=4 inject=none inject_frame=120 log_every=10 trace_csv=(disabled)
+active format snapshot:
+  width=640 height=480 fourcc=YUYV bytesperline=1280 sizeimage=614400
+timing:
+  stream duration: 4.182 s
+  fps(actual dq_ok / duration): 4.783
+select:
+  calls=20 ready=20 timeout=0 eintr=0 error=0
+dqbuf:
+  ok=20 fail=0 eagain=0
+qbuf(requeue):
+  ok=20 fail=0 skipped=0
+bytesused:
+  min=614400 max=614400 avg=614400.00
+  distribution (bytesused => count):
+    614400 => 20
+sequence:
+  observed_gap_frames=0 (仅作驱动行为观察，不是唯一丢帧标准)
+payload shape:
+  zero_bytes_frames=0 bytes_over_sizeimage_frames=0
+dq host interval(ms):
+  count=19 min=199.836 max=204.339 avg=202.329
+v4l2 timestamp interval(ms):
+  count=19 min=199.906 max=204.123 avg=202.321
+  zero_ts=0 backward_ts=0
+buffer flags distribution:
+  0x00012001|TS_MONOTONIC|SRC_SOE => 20
+=================================================
+

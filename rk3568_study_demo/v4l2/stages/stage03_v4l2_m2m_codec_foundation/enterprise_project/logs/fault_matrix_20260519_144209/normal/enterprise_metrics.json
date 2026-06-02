@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-05-19T14:42:10+0800",
+  "pass": true,
+  "fail_reason": "pass",
+  "config": {
+    "dev": "/dev/video0",
+    "width": 1280,
+    "height": 720,
+    "out_count": 4,
+    "cap_count": 4,
+    "timeout_ms": 200,
+    "loops": 8,
+    "output_bytesused": 16,
+    "max_input_chunks": 0,
+    "input_annexb": "",
+    "mplane": false,
+    "inject_timeout": false,
+    "inject_source_change": false,
+    "inject_dqbuf_eagain": false
+  },
+  "stats": {
+    "qbuf_out": 8,
+    "qbuf_cap": 8,
+    "dqbuf_out_ok": 8,
+    "dqbuf_cap_ok": 8,
+    "dqbuf_eagain": 0,
+    "poll_timeout": 0,
+    "source_change": 0,
+    "eos_count": 1,
+    "payload_bytes_total": 128,
+    "payload_chunks_total": 8,
+    "real_payload_mode": 0,
+    "state_transition": 7
+  }
+}

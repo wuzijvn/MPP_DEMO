@@ -1,0 +1,16 @@
+[run12] app=.../bin/12_enterprise_m2m_pipeline_service
+[run12] log_dir=.../logs/run_YYYYmmdd_HHMMSS
+YYYY-mm-ddTHH:MM:SS+0800 [INFO] enterprise stage03 start: dev=/dev/video0 ...
+[state] INIT -> DEVICE_OPENED reason=enter service bootstrap
+[state] DEVICE_OPENED -> CAPS_QUERIED reason=prepare querycap stage
+...
+YYYY-mm-ddTHH:MM:SS+0800 [WARN] real_payload_mode=0 use simulation payload: output_bytesused=16
+# or in real input mode:
+# YYYY-mm-ddTHH:MM:SS+0800 [INFO] real_payload_mode=1 input_annexb=... chunks=... bytes_total=...
+YYYY-mm-ddTHH:MM:SS+0800 [INFO] summary: state=STOPPED transitions=... qbuf_out=... qbuf_cap=... dq_out_ok=... dq_cap_ok=... dq_eagain=... poll_timeout=... source_change=... eos=... real_payload_mode=... payload_chunks=... payload_bytes=...
+[enterprise] log=.../enterprise_pipeline.log
+[enterprise] metrics=.../enterprise_metrics.json
+[enterprise] result=PASS
+
+# 注：若底层节点不支持当前格式，可能在 S_FMT 阶段 FAIL，属于可解释失败。
+# 注：若 INPUT_ANNEXB 不是 AnnexB（例如 mp4 容器），会提示 no AnnexB NALU found。

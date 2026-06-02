@@ -1,0 +1,7 @@
+S_FMT ... ok
+REQBUFS ... ok
+STREAMON type=... ok
+STREAMON type=... ok
+STREAMOFF type=... ok
+STREAMOFF type=... ok
+[demo07] PASS: STREAMON/STREAMOFF both queues done.

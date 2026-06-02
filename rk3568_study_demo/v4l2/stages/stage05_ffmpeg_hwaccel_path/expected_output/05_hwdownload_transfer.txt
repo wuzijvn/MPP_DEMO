@@ -1,0 +1,9 @@
+[demo05] teaching intent: this demo explains why hwdownload introduces copy-back.
+[demo05] run demo04 first to gather real hw/sw frame evidence.
+[demo05] params input=... decoder=h264_rkmpp hw_type=(not-forced) max_frames=...
+[demo05] expected evidence:
+  1) hwdevice mode: if hw frame appears, transfer_data causes device->cpu copy
+  2) rkmpp wrapper mode: decoded frames may be CPU-visible; hard-decode proof comes from decoder selection and benchmark/dmesg
+  3) if only software decoder is selected, fallback happened or backend unavailable
+[demo05] driver_shadow: hwdownload often breaks zero-copy chain and increases memory bandwidth pressure.
+[demo05] PASS

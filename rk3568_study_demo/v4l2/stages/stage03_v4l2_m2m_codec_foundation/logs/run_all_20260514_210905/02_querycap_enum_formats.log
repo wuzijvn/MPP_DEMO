@@ -1,0 +1,4 @@
+[demo02] driver=vim2m card=vim2m m2m=1
+[demo02] OUTPUT formats: RGBP RGBR RGB3 BGR3
+[demo02] CAPTURE formats: RGBP RGBR RGB3 BGR3 YUYV BA81 GBRG GRBG RGGB
+[demo02] PASS: querycap + enum formats done

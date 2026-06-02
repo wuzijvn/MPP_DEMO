@@ -1,0 +1,1 @@
+crw-rw----+ 1 root video 81, 0 5月  14 16:14 /dev/video0

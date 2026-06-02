@@ -1,0 +1,68 @@
+[demo04] wrapper mode: decoder=h264, no hwdevice forced
+[demo04] note: RKMPP hard decode evidence comes from decoder selection + successful frames.
+[demo04] frame sw_fallback idx=1 fmt=yuv420p pts=0
+[demo04] frame sw_fallback idx=2 fmt=yuv420p pts=1
+[demo04] frame sw_fallback idx=3 fmt=yuv420p pts=2
+[demo04] frame sw_fallback idx=4 fmt=yuv420p pts=3
+[demo04] frame sw_fallback idx=5 fmt=yuv420p pts=4
+[demo04] frame sw_fallback idx=6 fmt=yuv420p pts=5
+[demo04] frame sw_fallback idx=7 fmt=yuv420p pts=6
+[demo04] frame sw_fallback idx=8 fmt=yuv420p pts=7
+[demo04] frame sw_fallback idx=9 fmt=yuv420p pts=8
+[demo04] frame sw_fallback idx=10 fmt=yuv420p pts=9
+[demo04] frame sw_fallback idx=11 fmt=yuv420p pts=10
+[demo04] frame sw_fallback idx=12 fmt=yuv420p pts=11
+[demo04] frame sw_fallback idx=13 fmt=yuv420p pts=12
+[demo04] frame sw_fallback idx=14 fmt=yuv420p pts=13
+[demo04] frame sw_fallback idx=15 fmt=yuv420p pts=14
+[demo04] frame sw_fallback idx=16 fmt=yuv420p pts=15
+[demo04] frame sw_fallback idx=17 fmt=yuv420p pts=16
+[demo04] frame sw_fallback idx=18 fmt=yuv420p pts=17
+[demo04] frame sw_fallback idx=19 fmt=yuv420p pts=18
+[demo04] frame sw_fallback idx=20 fmt=yuv420p pts=19
+[demo04] frame sw_fallback idx=21 fmt=yuv420p pts=20
+[demo04] frame sw_fallback idx=22 fmt=yuv420p pts=21
+[demo04] frame sw_fallback idx=23 fmt=yuv420p pts=22
+[demo04] frame sw_fallback idx=24 fmt=yuv420p pts=23
+[demo04] frame sw_fallback idx=25 fmt=yuv420p pts=24
+[demo04] frame sw_fallback idx=26 fmt=yuv420p pts=25
+[demo04] frame sw_fallback idx=27 fmt=yuv420p pts=26
+[demo04] frame sw_fallback idx=28 fmt=yuv420p pts=27
+[demo04] frame sw_fallback idx=29 fmt=yuv420p pts=28
+[demo04] frame sw_fallback idx=30 fmt=yuv420p pts=29
+[demo04] frame sw_fallback idx=31 fmt=yuv420p pts=30
+[demo04] frame sw_fallback idx=32 fmt=yuv420p pts=31
+[demo04] frame sw_fallback idx=33 fmt=yuv420p pts=32
+[demo04] frame sw_fallback idx=34 fmt=yuv420p pts=33
+[demo04] frame sw_fallback idx=35 fmt=yuv420p pts=34
+[demo04] frame sw_fallback idx=36 fmt=yuv420p pts=35
+[demo04] frame sw_fallback idx=37 fmt=yuv420p pts=36
+[demo04] frame sw_fallback idx=38 fmt=yuv420p pts=37
+[demo04] frame sw_fallback idx=39 fmt=yuv420p pts=38
+[demo04] frame sw_fallback idx=40 fmt=yuv420p pts=39
+[demo04] frame sw_fallback idx=41 fmt=yuv420p pts=40
+[demo04] frame sw_fallback idx=42 fmt=yuv420p pts=41
+[demo04] frame sw_fallback idx=43 fmt=yuv420p pts=42
+[demo04] frame sw_fallback idx=44 fmt=yuv420p pts=43
+[demo04] frame sw_fallback idx=45 fmt=yuv420p pts=44
+[demo04] frame sw_fallback idx=46 fmt=yuv420p pts=45
+[demo04] frame sw_fallback idx=47 fmt=yuv420p pts=46
+[demo04] frame sw_fallback idx=48 fmt=yuv420p pts=47
+[demo04] frame sw_fallback idx=49 fmt=yuv420p pts=48
+[demo04] frame sw_fallback idx=50 fmt=yuv420p pts=49
+[demo04] frame sw_fallback idx=51 fmt=yuv420p pts=50
+[demo04] frame sw_fallback idx=52 fmt=yuv420p pts=51
+[demo04] frame sw_fallback idx=53 fmt=yuv420p pts=52
+[demo04] frame sw_fallback idx=54 fmt=yuv420p pts=53
+[demo04] frame sw_fallback idx=55 fmt=yuv420p pts=54
+[demo04] frame sw_fallback idx=56 fmt=yuv420p pts=55
+[demo04] frame sw_fallback idx=57 fmt=yuv420p pts=56
+[demo04] frame sw_fallback idx=58 fmt=yuv420p pts=57
+[demo04] frame sw_fallback idx=59 fmt=yuv420p pts=58
+[demo04] frame sw_fallback idx=60 fmt=yuv420p pts=59
+[demo04] summary decoder=h264 hw_type=(not-forced) hw_frames=0 wrapper_frames=0 sw_fallback_frames=60 hwdownload_ok=0 fallback=1
+[demo04] verdict=SOFTWARE_FALLBACK
+[demo04] verdict_reason=non-wrapper software-visible fallback frames observed
+[demo04] verdict_cn=软解回退：未形成可证明的硬件帧/硬解 wrapper 证据
+[demo04] how_to_read: HARDWARE_FRAME_CONFIRMED=硬件帧; HARDWARE_DECODE_WRAPPER_OUTPUT=rkmpp硬解但CPU可见帧; SOFTWARE_FALLBACK=软解回退
+[demo04] PASS

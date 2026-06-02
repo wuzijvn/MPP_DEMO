@@ -1,0 +1,4 @@
+[demo09] m2m decoder sequence pseudocode (runnable printer)
+open -> QUERYCAP -> ENUM_FMT -> S_FMT(OUTPUT/CAPTURE)
+...
+[demo09] PASS

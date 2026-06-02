@@ -1,0 +1,8 @@
+[demo08] fallback detection checklist
+[demo08] 1. confirm selected decoder, e.g. h264_rkmpp/hevc_rkmpp on RK3568
+[demo08] 2. confirm packets and frames are produced without software decoder fallback
+[demo08] 3. explicit hwdevice mode only: confirm hw device and hw pix fmt
+[demo08] 4. confirm no hidden transfer-to-cpu before sink when claiming zero-copy
+[demo08] 5. collect dmesg/backend logs
+[demo08] 6. compare with software baseline to isolate framework vs driver issues
+[demo08] PASS

@@ -1,0 +1,13 @@
+{
+  "pass": true,
+  "input": "../samples/sample.mp4",
+  "max_frames": 120,
+  "inject_send_fail": true,
+  "inject_receive_fail": false,
+  "packet_in": 126,
+  "frame_out": 120,
+  "error_count": 4,
+  "state_transition": 5,
+  "elapsed_s": 0.076824,
+  "fps": 1562.01
+}

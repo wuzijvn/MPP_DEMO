@@ -1,0 +1,84 @@
+
+==== device nodes ====
+crw-rw----+ 1 root video  226,   0 May 27 01:38 /dev/dri/card0
+crw-rw----+ 1 root video  226,   1 May 27 01:38 /dev/dri/card1
+crw-rw----+ 1 root render 226, 128 May 27 01:38 /dev/dri/renderD128
+crw-rw----+ 1 root render 226, 129 May 27 01:38 /dev/dri/renderD129
+-rw-rw----  1 root video         4 May 27 01:38 /dev/video-dec0
+-rw-rw----  1 root video         4 May 27 01:38 /dev/video-enc0
+crw-rw----+ 1 root video   81,   0 May 27 01:38 /dev/video0
+crw-rw----+ 1 root video   81,   1 May 27 01:38 /dev/video1
+crw-rw----+ 1 root video   81,  10 May 27 01:38 /dev/video10
+crw-rw----+ 1 root video   81,  11 May 27 01:38 /dev/video11
+crw-rw----+ 1 root video   81,   2 May 27 01:38 /dev/video2
+crw-rw----+ 1 root video   81,   3 May 27 01:38 /dev/video3
+crw-rw----+ 1 root video   81,   4 May 27 01:38 /dev/video4
+crw-rw----+ 1 root video   81,   5 May 27 01:38 /dev/video5
+crw-rw----+ 1 root video   81,   6 May 27 01:38 /dev/video6
+crw-rw----+ 1 root video   81,   7 May 27 01:38 /dev/video7
+crw-rw----+ 1 root video   81,   8 May 27 01:38 /dev/video8
+crw-rw----+ 1 root video   81,   9 May 27 01:38 /dev/video9
+
+/dev/dri/by-path:
+total 0
+lrwxrwxrwx 1 root root  8 May 27 01:38 platform-display-subsystem-card -> ../card0
+lrwxrwxrwx 1 root root 13 May 27 01:38 platform-display-subsystem-render -> ../renderD128
+lrwxrwxrwx 1 root root  8 May 27 01:38 platform-fde40000.npu-card -> ../card1
+lrwxrwxrwx 1 root root 13 May 27 01:38 platform-fde40000.npu-render -> ../renderD129
+
+==== v4l2 devices ====
+rkisp-statistics (platform: rkisp):
+	/dev/video8
+	/dev/video9
+
+rkisp_mainpath (platform:rkisp-vir0):
+	/dev/video0
+	/dev/video1
+	/dev/video2
+	/dev/video3
+	/dev/video4
+	/dev/video5
+	/dev/video6
+	/dev/video7
+	/dev/media0
+
+HD camera : HD camera  (usb-fd800000.usb-1):
+	/dev/video10
+	/dev/video11
+	/dev/media1
+
+
+==== ffmpeg rkmpp/v4l2 decoders ====
+ V....D av1                  Alliance for Open Media AV1
+ V..... av1_rkmpp            Rockchip MPP (Media Process Platform) AV1 decoder (codec av1)
+ V..... h263_v4l2m2m         V4L2 mem2mem H.263 decoder wrapper (codec h263)
+ V..... h263_rkmpp           Rockchip MPP (Media Process Platform) H263 decoder (codec h263)
+ VFS..D h264                 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10
+ V..... h264_v4l2m2m         V4L2 mem2mem H.264 decoder wrapper (codec h264)
+ V..... h264_rkmpp           Rockchip MPP (Media Process Platform) H264 decoder (codec h264)
+ VFS..D hevc                 HEVC (High Efficiency Video Coding)
+ V..... hevc_rkmpp           Rockchip MPP (Media Process Platform) HEVC decoder (codec hevc)
+ V..... hevc_v4l2m2m         V4L2 mem2mem HEVC decoder wrapper (codec hevc)
+ V..... mjpeg_rkmpp          Rockchip MPP (Media Process Platform) MJPEG decoder (codec mjpeg)
+ V..... mpeg1_v4l2m2m        V4L2 mem2mem MPEG1 decoder wrapper (codec mpeg1video)
+ V..... mpeg1_rkmpp          Rockchip MPP (Media Process Platform) MPEG1VIDEO decoder (codec mpeg1video)
+ V..... mpeg2_v4l2m2m        V4L2 mem2mem MPEG2 decoder wrapper (codec mpeg2video)
+ V..... mpeg2_rkmpp          Rockchip MPP (Media Process Platform) MPEG2VIDEO decoder (codec mpeg2video)
+ V..... mpeg4_v4l2m2m        V4L2 mem2mem MPEG4 decoder wrapper (codec mpeg4)
+ V..... mpeg4_rkmpp          Rockchip MPP (Media Process Platform) MPEG4 decoder (codec mpeg4)
+ V..... vc1_v4l2m2m          V4L2 mem2mem VC1 decoder wrapper (codec vc1)
+ VFS..D vp8                  On2 VP8
+ V..... vp8_rkmpp            Rockchip MPP (Media Process Platform) VP8 decoder (codec vp8)
+ V..... vp8_v4l2m2m          V4L2 mem2mem VP8 decoder wrapper (codec vp8)
+ VFS..D vp9                  Google VP9
+ V..... vp9_rkmpp            Rockchip MPP (Media Process Platform) VP9 decoder (codec vp9)
+ V..... vp9_v4l2m2m          V4L2 mem2mem VP9 decoder wrapper (codec vp9)
+ A....D wmav1                Windows Media Audio 1
+
+==== dmesg media hints ====
+
+==== verdict ====
+v4l2_m2m_status=NOT_FOUND
+rkmpp_status=AVAILABLE
+recommended_learning_path=RKMPP_REAL_PATH_PLUS_V4L2_M2M_CONCEPT
+meaning=当前板端没有可用 V4L2 M2M codec 字符设备；真实硬解验证应优先使用 FFmpeg h264_rkmpp/hevc_rkmpp。Stage06 的 ioctl/queue 内容按概念和模拟方式学习，不要强行对 rkisp/camera 节点跑 codec ioctl。

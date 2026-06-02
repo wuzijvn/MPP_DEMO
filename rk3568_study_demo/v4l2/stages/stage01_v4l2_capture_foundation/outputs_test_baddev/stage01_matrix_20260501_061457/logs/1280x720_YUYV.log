@@ -1,0 +1,6 @@
+cmd: /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage01_v4l2_capture_foundation/bin/stage01_v4l2_capture_main /dev/video999 1280 720 ./outputs_test_baddev/stage01_matrix_20260501_061457/preview/1280x720_YUYV.yuyv ./outputs_test_baddev/stage01_matrix_20260501_061457/preview/1280x720_YUYV.ppm 10 --warmup=3 --fps=30 --pixfmt=YUYV --timeout-ms=2000 --req-bufs=4 --log-every=100 --trace-csv=./outputs_test_baddev/stage01_matrix_20260501_061457/traces/1280x720_YUYV.csv
+
+start capture with config:
+  dev=/dev/video999 req=1280x720 pixfmt=YUYV raw=./outputs_test_baddev/stage01_matrix_20260501_061457/preview/1280x720_YUYV.yuyv ppm=./outputs_test_baddev/stage01_matrix_20260501_061457/preview/1280x720_YUYV.ppm frames=10 warmup=3 fps=30 timeout_ms=2000 req_bufs=4 dump_formats=0 inject=none inject_frame=120 save=1 log_every=100 trace_csv=./outputs_test_baddev/stage01_matrix_20260501_061457/traces/1280x720_YUYV.csv
+open video device failed: No such file or directory
+no stable frame available to save (maybe stopped before warmup finished)

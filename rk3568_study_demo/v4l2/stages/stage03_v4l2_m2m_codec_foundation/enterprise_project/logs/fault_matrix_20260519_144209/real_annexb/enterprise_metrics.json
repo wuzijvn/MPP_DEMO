@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-05-19T14:42:11+0800",
+  "pass": true,
+  "fail_reason": "pass",
+  "config": {
+    "dev": "/dev/video0",
+    "width": 1280,
+    "height": 720,
+    "out_count": 4,
+    "cap_count": 4,
+    "timeout_ms": 200,
+    "loops": 8,
+    "output_bytesused": 16,
+    "max_input_chunks": 8,
+    "input_annexb": "/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage03_v4l2_m2m_codec_foundation/enterprise_project/../samples/sample_720p_h264.annexb",
+    "mplane": false,
+    "inject_timeout": false,
+    "inject_source_change": false,
+    "inject_dqbuf_eagain": false
+  },
+  "stats": {
+    "qbuf_out": 4,
+    "qbuf_cap": 4,
+    "dqbuf_out_ok": 4,
+    "dqbuf_cap_ok": 4,
+    "dqbuf_eagain": 0,
+    "poll_timeout": 0,
+    "source_change": 0,
+    "eos_count": 1,
+    "payload_bytes_total": 37,
+    "payload_chunks_total": 4,
+    "real_payload_mode": 1,
+    "state_transition": 7
+  }
+}

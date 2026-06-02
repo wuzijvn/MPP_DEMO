@@ -1,0 +1,18 @@
+[2026-06-01 09:02:29][INFO] stage05 enterprise start input=../samples/sample.mp4 decoder=h264_rkmpp hw_type=(not-forced) device=(auto) max_frames=120
+[2026-06-01 09:02:29][INFO] inject flags device_fail=0 force_sw=0 transfer_fail=0 missing_hwfmt=0
+[2026-06-01 09:02:29][INFO] wrapper mode: no hw_type forced; decoder wrapper is the primary evidence path
+[2026-06-01 09:02:29][INFO] progress frame=10 hw=0 cpu_visible=10 transfer_ok=0 transfer_fail=0
+[2026-06-01 09:02:29][INFO] progress frame=20 hw=0 cpu_visible=20 transfer_ok=0 transfer_fail=0
+[2026-06-01 09:02:29][INFO] progress frame=30 hw=0 cpu_visible=30 transfer_ok=0 transfer_fail=0
+[2026-06-01 09:02:29][INFO] progress frame=40 hw=0 cpu_visible=40 transfer_ok=0 transfer_fail=0
+[2026-06-01 09:02:29][INFO] progress frame=50 hw=0 cpu_visible=50 transfer_ok=0 transfer_fail=0
+[2026-06-01 09:02:29][INFO] progress frame=60 hw=0 cpu_visible=60 transfer_ok=0 transfer_fail=0
+[2026-06-01 09:02:30][INFO] progress frame=70 hw=0 cpu_visible=70 transfer_ok=0 transfer_fail=0
+[2026-06-01 09:02:30][INFO] progress frame=80 hw=0 cpu_visible=80 transfer_ok=0 transfer_fail=0
+[2026-06-01 09:02:30][INFO] progress frame=90 hw=0 cpu_visible=90 transfer_ok=0 transfer_fail=0
+[2026-06-01 09:02:30][INFO] progress frame=100 hw=0 cpu_visible=100 transfer_ok=0 transfer_fail=0
+[2026-06-01 09:02:30][INFO] progress frame=110 hw=0 cpu_visible=110 transfer_ok=0 transfer_fail=0
+[2026-06-01 09:02:30][INFO] progress frame=120 hw=0 cpu_visible=120 transfer_ok=0 transfer_fail=0
+[2026-06-01 09:02:30][INFO] summary final_state=Stopped transitions=6 packet_read=361 packet_sent=124 frame_recv=120 hw=0 cpu_visible=120 transfer_ok=0 transfer_fail=0 fallback_count=0 err_count=0
+[2026-06-01 09:02:30][INFO] driver_shadow: default RKMPP wrapper evidence is decoder selection plus decoded frames; explicit hwdevice mode may map to /dev/dri/renderD* or backend-specific nodes, and fallback often comes from hwfmt/device negotiation failure.
+[2026-06-01 09:02:30][INFO] gate pass

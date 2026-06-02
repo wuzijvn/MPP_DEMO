@@ -1,0 +1,18 @@
+poll ret=1 revents=0x8 timeout_ms=120
+[demo10] poll got event. Real flow should DQEVENT/DQBUF then branch by flags/event type.
+[source_change] expected recovery path:
+  1) DQEVENT(V4L2_EVENT_SOURCE_CHANGE)
+  2) STREAMOFF(CAPTURE)
+  3) REQBUFS(CAPTURE,count=0) release old capture buffers
+  4) G_FMT or decoder metadata query new resolution
+  5) S_FMT(CAPTURE new size/fmt)
+  6) REQBUFS+QUERYBUF+MMAP(CAPTURE new buffers)
+  7) QBUF all CAPTURE buffers
+  8) STREAMON(CAPTURE) and continue DQBUF loop
+[eos_drain] expected path:
+  1) OUTPUT queue last input submitted
+  2) Continue DQBUF CAPTURE until LAST flag or drain condition
+  3) Stop after all in-flight frames are returned
+  4) STREAMOFF both queues
+  5) Unmap buffers and close device
+[demo10] NOTE: this demo is a runnable recovery-playbook printer, not a full codec stream implementation.

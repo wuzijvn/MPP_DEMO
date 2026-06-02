@@ -1,0 +1,4 @@
+[demo01] input=./samples/sample.mp4
+[stream-brief] nb_streams=...
+[demo01] best_video_stream=... codec_id=... 1920x1080
+[demo01] PASS

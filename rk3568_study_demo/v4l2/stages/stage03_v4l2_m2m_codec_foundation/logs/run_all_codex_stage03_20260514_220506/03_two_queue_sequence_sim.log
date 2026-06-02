@@ -1,0 +1,15 @@
+[demo03] two-queue ownership sequence simulation
+1) S_FMT OUTPUT
+2) S_FMT CAPTURE
+3) REQBUFS OUTPUT/CAPTURE
+4) QBUF CAPTURE (empty buffers -> driver)
+5) QBUF OUTPUT (input buffers -> driver)
+6) STREAMON both queues
+7.1 DQBUF CAPTURE (driver -> user)
+7.1 QBUF CAPTURE (user -> driver)
+7.2 DQBUF CAPTURE (driver -> user)
+7.2 QBUF CAPTURE (user -> driver)
+7.3 DQBUF CAPTURE (driver -> user)
+7.3 QBUF CAPTURE (user -> driver)
+8) STREAMOFF both queues
+[demo03] PASS: report=./logs/sim_sequence/demo03_report.md

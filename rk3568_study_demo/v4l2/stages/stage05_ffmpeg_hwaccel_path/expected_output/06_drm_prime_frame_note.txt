@@ -1,0 +1,4 @@
+[demo06] DRM PRIME note
+[demo06] hw frame can be exported as dma-buf/drm prime fd in specific backend path.
+[demo06] zero-copy is not proven by command options alone; check frame format + import path evidence.
+[demo06] PASS

@@ -1,0 +1,56 @@
+Driver Info:
+	Driver name      : uvcvideo
+	Card type        : HD camera : HD camera 
+	Bus info         : usb-fd800000.usb-1
+	Driver version   : 5.10.198
+	Capabilities     : 0x84a00001
+		Video Capture
+		Metadata Capture
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+	Device Caps      : 0x04200001
+		Video Capture
+		Streaming
+		Extended Pix Format
+Media Driver Info:
+	Driver name      : uvcvideo
+	Model            : HD camera : HD camera 
+	Serial           : 20201212000000
+	Bus info         : usb-fd800000.usb-1
+	Media version    : 5.10.198
+	Hardware revision: 0x00000301 (769)
+	Driver version   : 5.10.198
+Interface Info:
+	ID               : 0x03000002
+	Type             : V4L Video
+Entity Info:
+	ID               : 0x00000001 (1)
+	Name             : HD camera : HD camera 
+	Function         : V4L2 I/O
+	Flags         : default
+	Pad 0x01000007   : 0: Sink
+	  Link 0x0200000d: from remote pad 0x100000a of entity 'Processing 2': Data, Enabled, Immutable
+Priority: 2
+Video input : 0 (Input 1: ok)
+Format Video Capture:
+	Width/Height      : 640/480
+	Pixel Format      : 'YUYV' (YUYV 4:2:2)
+	Field             : None
+	Bytes per Line    : 1280
+	Size Image        : 614400
+	Colorspace        : Default
+	Transfer Function : Default (maps to Rec. 709)
+	YCbCr/HSV Encoding: Default (maps to ITU-R 601)
+	Quantization      : Default (maps to Limited Range)
+	Flags             : 
+Crop Capability Video Capture:
+	Bounds      : Left 0, Top 0, Width 640, Height 480
+	Default     : Left 0, Top 0, Width 640, Height 480
+	Pixel Aspect: 1/1
+Selection Video Capture: crop_default, Left 0, Top 0, Width 640, Height 480, Flags: 
+Selection Video Capture: crop_bounds, Left 0, Top 0, Width 640, Height 480, Flags: 
+Streaming Parameters Video Capture:
+	Capabilities     : timeperframe
+	Frames per second: 30.000 (30/1)
+	Read buffers     : 0

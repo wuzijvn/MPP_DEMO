@@ -1,0 +1,15 @@
+[demo11] bitstream payload to QBUF bytesused bridge
+[demo11] source=built-in synthetic h264 Annex B teaching stream
+[demo11] codec=h264 input_bytes=39 max_output_bytes=0
+[demo11] nalu[0]: range=[0,13) start_code=4 payload_bytes=9 buffer_bytes=13 type=7(SPS)
+[demo11] qbuf_plan[0.0]: copy [0,13) -> OUTPUT buffer; set bytesused=13
+[demo11] nalu[1]: range=[13,21) start_code=4 payload_bytes=4 buffer_bytes=8 type=8(PPS)
+[demo11] qbuf_plan[1.0]: copy [13,21) -> OUTPUT buffer; set bytesused=8
+[demo11] nalu[2]: range=[21,31) start_code=3 payload_bytes=7 buffer_bytes=10 type=5(IDR slice)
+[demo11] qbuf_plan[2.0]: copy [21,31) -> OUTPUT buffer; set bytesused=10
+[demo11] nalu[3]: range=[31,39) start_code=3 payload_bytes=5 buffer_bytes=8 type=1(non-IDR slice)
+[demo11] qbuf_plan[3.0]: copy [31,39) -> OUTPUT buffer; set bytesused=8
+[demo11] summary: nal_count=4 total_qbuf_bytes=39
+[demo11] boundary: this demo does not call VIDIOC_QBUF and does not prove hardware decode. It explains what demo06's placeholder bytesused must become when real bitstream payload is used.
+[demo11] driver_shadow: after OUTPUT QBUF, the driver/firmware consumes these bytes, parses codec headers such as SPS/PPS/VPS, advances reference state, and later returns decoded frames through CAPTURE DQBUF.
+[demo11] PASS

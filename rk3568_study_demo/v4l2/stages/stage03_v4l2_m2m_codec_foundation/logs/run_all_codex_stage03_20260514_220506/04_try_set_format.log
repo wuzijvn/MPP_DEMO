@@ -1,0 +1,4 @@
+[demo04] driver=vim2m card=vim2m dev=/dev/video0
+S_FMT type=2 ok: 64x64 fourcc=RGB3 bytesperline=192 sizeimage=12288
+S_FMT type=1 ok: 64x64 fourcc=RGB3 bytesperline=192 sizeimage=12288
+[demo04] PASS: S_FMT OUTPUT/CAPTURE both succeeded

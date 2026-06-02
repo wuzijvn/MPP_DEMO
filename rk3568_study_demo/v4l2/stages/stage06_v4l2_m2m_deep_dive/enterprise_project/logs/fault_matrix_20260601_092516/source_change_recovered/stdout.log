@@ -1,0 +1,28 @@
+[INFO][config] device=/dev/video0, output_dir=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive/enterprise_project/logs/fault_matrix_20260601_092516/source_change_recovered, inject=source_change, output_fourcc=H264, capture_fourcc=NV12, size=1280x720, frames=12, output_depth=3, capture_depth=4, timeout_at=-1, source_change_at=4, bytesused_zero_at=-1, recover=yes, require_device=no
+[INFO][state] INIT -> OPEN_DEVICE
+[INFO][device] opened /dev/video0
+[INFO][querycap] driver=rkisp_v5, card=rkisp_mainpath
+[INFO][format] OUTPUT=H264, CAPTURE=NV12, size=1280x720; real driver may adjust coded size, stride and sizeimage
+[INFO][buffer] OUTPUT buffers=3, CAPTURE buffers=4
+[INFO][stream] STREAMON OUTPUT + CAPTURE
+[INFO][loop] frame=1 qbuf_out_depth=1 qbuf_cap_depth=1
+[INFO][loop] frame=2 qbuf_out_depth=1 qbuf_cap_depth=1
+[INFO][loop] frame=3 qbuf_out_depth=1 qbuf_cap_depth=1
+[WARN][source_change] frame=4 requires CAPTURE STREAMOFF/REQBUFS/S_FMT/STREAMON
+[INFO][recovery] CAPTURE queue reconfigured and buffers will be requeued
+[INFO][loop] frame=4 qbuf_out_depth=1 qbuf_cap_depth=1
+[INFO][loop] frame=5 qbuf_out_depth=1 qbuf_cap_depth=1
+[INFO][loop] frame=6 qbuf_out_depth=1 qbuf_cap_depth=1
+[INFO][loop] frame=7 qbuf_out_depth=1 qbuf_cap_depth=1
+[INFO][loop] frame=8 qbuf_out_depth=1 qbuf_cap_depth=1
+[INFO][loop] frame=9 qbuf_out_depth=1 qbuf_cap_depth=1
+[INFO][loop] frame=10 qbuf_out_depth=1 qbuf_cap_depth=1
+[INFO][loop] frame=11 qbuf_out_depth=1 qbuf_cap_depth=1
+[INFO][loop] frame=12 qbuf_out_depth=1 qbuf_cap_depth=1
+[INFO][drain] DQBUF delayed CAPTURE frame from DPB slot 0
+[INFO][drain] DQBUF delayed CAPTURE frame from DPB slot 1
+[INFO][stream] STREAMOFF OUTPUT + CAPTURE; release simulated buffers
+[INFO][gate] decoded_frames=12, qbuf_output=12, qbuf_capture=12, dqbuf_output=12, dqbuf_capture=14, poll_calls=14, timeout_count=0, bytesused_zero_count=0, source_change_count=1, recovery_count=1, gate_pass=yes, verdict=PASS_WITH_RECOVERY_EVIDENCE, failure_layer=none
+enterprise_log=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive/enterprise_project/logs/fault_matrix_20260601_092516/source_change_recovered/enterprise_pipeline.log
+enterprise_metrics=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive/enterprise_project/logs/fault_matrix_20260601_092516/source_change_recovered/enterprise_metrics.json
+enterprise_verdict=PASS_WITH_RECOVERY_EVIDENCE

@@ -1,0 +1,8 @@
+[demo04] wrapper mode: decoder=h264_rkmpp, no hwdevice forced
+[demo04] note: RKMPP hard decode evidence comes from decoder selection + successful frames.
+[demo04] frame wrapper idx=1 fmt=... pts=...
+[demo04] summary decoder=h264_rkmpp hw_type=(not-forced) hw_frames=... wrapper_frames=... sw_fallback_frames=... hwdownload_ok=... fallback=0
+[demo04] verdict=HARDWARE_DECODE_WRAPPER_OUTPUT
+[demo04] verdict_reason=rkmpp wrapper decoder selected and decoded frames are CPU-visible
+[demo04] how_to_read: HARDWARE_FRAME_CONFIRMED=硬件帧; HARDWARE_DECODE_WRAPPER_OUTPUT=rkmpp硬解但CPU可见帧; SOFTWARE_FALLBACK=软解回退
+[demo04] PASS

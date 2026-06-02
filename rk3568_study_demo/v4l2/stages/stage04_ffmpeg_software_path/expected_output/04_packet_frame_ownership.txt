@@ -1,0 +1,3 @@
+[demo04] packet ownership: demux -> pkt(size=...) -> decoder
+[demo04] frame ownership: decoder -> frame(w=... h=... fmt=...) -> app
+[demo04] PASS

@@ -1,0 +1,10 @@
+case,fps,select_timeout,dq_fail,dq_eagain,requeue_fail,requeue_skipped,bytes_min,bytes_max,bytes_avg,dq_interval_avg_ms,v4l2_interval_avg_ms,active_fmt,ret
+A_baseline_640x480_yuyv_buf4,4.936,0,0,0,0,0,614400,614400,614400.00,202.423,202.426,"width=640 height=480 fourcc=YUYV bytesperline=1280 sizeimage=614400",0
+B_reqbufs_2_640x480_yuyv,4.939,0,0,0,0,0,614400,614400,614400.00,202.423,202.426,"width=640 height=480 fourcc=YUYV bytesperline=1280 sizeimage=614400",0
+B_reqbufs_4_640x480_yuyv,4.939,0,0,0,0,0,614400,614400,614400.00,202.425,202.427,"width=640 height=480 fourcc=YUYV bytesperline=1280 sizeimage=614400",0
+B_reqbufs_8_640x480_yuyv,4.881,0,0,0,0,0,614400,614400,614400.00,202.423,202.426,"width=640 height=480 fourcc=YUYV bytesperline=1280 sizeimage=614400",0
+C_pixfmt_YUYV_640x480,4.866,0,0,0,0,0,614400,614400,614400.00,202.421,202.425,"width=640 height=480 fourcc=YUYV bytesperline=1280 sizeimage=614400",0
+C_pixfmt_MJPG_640x480,4.936,0,0,0,0,0,614400,614400,614400.00,202.398,202.393,"width=640 height=480 fourcc=YUYV bytesperline=1280 sizeimage=614400",0
+D_res_640x480_yuyv,4.919,0,0,0,0,0,614400,614400,614400.00,202.423,202.426,"width=640 height=480 fourcc=YUYV bytesperline=1280 sizeimage=614400",0
+D_res_1280x720_yuyv,4.915,0,0,0,0,0,614400,614400,614400.00,202.423,202.426,"width=640 height=480 fourcc=YUYV bytesperline=1280 sizeimage=614400",0
+E_inject_skip_requeue_f20,4.584,1,0,0,0,4,614400,614400,614400.00,202.376,202.370,"width=640 height=480 fourcc=YUYV bytesperline=1280 sizeimage=614400",2

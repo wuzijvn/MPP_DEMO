@@ -1,0 +1,51 @@
+Stage06 Demo03: REQBUFS/QUERYBUF/MMAP lifecycle simulation
+output_buffers     : 3
+capture_buffers    : 4
+
+阶段 A: VIDIOC_REQBUFS 之后，驱动/vb2 为两个队列准备 buffer 槽位
+OUTPUT     index=0  length=262144  owner=USER
+OUTPUT     index=1  length=262144  owner=USER
+OUTPUT     index=2  length=262144  owner=USER
+CAPTURE    index=0  length=1382400 owner=USER
+CAPTURE    index=1  length=1382400 owner=USER
+CAPTURE    index=2  length=1382400 owner=USER
+CAPTURE    index=3  length=1382400 owner=USER
+
+阶段 B: VIDIOC_QUERYBUF + mmap 之后，用户态获得可访问地址，但所有权仍是 USER
+OUTPUT[0] mmap(addr=teaching_pointer, length=262144) -> USER can fill/read when not queued
+OUTPUT[1] mmap(addr=teaching_pointer, length=262144) -> USER can fill/read when not queued
+OUTPUT[2] mmap(addr=teaching_pointer, length=262144) -> USER can fill/read when not queued
+CAPTURE[0] mmap(addr=teaching_pointer, length=1382400) -> USER can fill/read when not queued
+CAPTURE[1] mmap(addr=teaching_pointer, length=1382400) -> USER can fill/read when not queued
+CAPTURE[2] mmap(addr=teaching_pointer, length=1382400) -> USER can fill/read when not queued
+CAPTURE[3] mmap(addr=teaching_pointer, length=1382400) -> USER can fill/read when not queued
+
+阶段 C: QBUF 之后，所有权转移到驱动，用户态不应再写该 buffer
+OUTPUT     index=0  length=262144  owner=DRIVER_QUEUED
+OUTPUT     index=1  length=262144  owner=DRIVER_QUEUED
+OUTPUT     index=2  length=262144  owner=DRIVER_QUEUED
+CAPTURE    index=0  length=1382400 owner=DRIVER_QUEUED
+CAPTURE    index=1  length=1382400 owner=DRIVER_QUEUED
+CAPTURE    index=2  length=1382400 owner=DRIVER_QUEUED
+CAPTURE    index=3  length=1382400 owner=DRIVER_QUEUED
+
+阶段 D: STREAMON 后，驱动可以把 queued buffer 变为 active job buffer
+OUTPUT     index=0  length=262144  owner=DRIVER_ACTIVE
+OUTPUT     index=1  length=262144  owner=DRIVER_QUEUED
+OUTPUT     index=2  length=262144  owner=DRIVER_QUEUED
+CAPTURE    index=0  length=1382400 owner=DRIVER_ACTIVE
+CAPTURE    index=1  length=1382400 owner=DRIVER_QUEUED
+CAPTURE    index=2  length=1382400 owner=DRIVER_QUEUED
+CAPTURE    index=3  length=1382400 owner=DRIVER_QUEUED
+
+阶段 E: DQBUF 后，完成的 buffer 回到用户态；用户态读取后可再次 QBUF
+OUTPUT     index=0  length=262144  owner=USER_DONE
+OUTPUT     index=1  length=262144  owner=DRIVER_QUEUED
+OUTPUT     index=2  length=262144  owner=DRIVER_QUEUED
+CAPTURE    index=0  length=1382400 owner=USER_DONE
+CAPTURE    index=1  length=1382400 owner=DRIVER_QUEUED
+CAPTURE    index=2  length=1382400 owner=DRIVER_QUEUED
+CAPTURE    index=3  length=1382400 owner=DRIVER_QUEUED
+
+资源释放顺序：STREAMOFF -> munmap(each buffer) -> REQBUFS count=0 -> close(fd)
+verdict=MMAP_LIFECYCLE_UNDERSTOOD

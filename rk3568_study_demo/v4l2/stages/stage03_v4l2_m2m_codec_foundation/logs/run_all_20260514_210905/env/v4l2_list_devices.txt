@@ -1,0 +1,3 @@
+vim2m (platform:vim2m):
+	/dev/video0
+
