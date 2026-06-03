@@ -1,5 +1,0 @@
-Stage06 Demo06: timeout debug report template
-scenario           : dqbuf_timeout
-report             : logs/06_timeout_debug_report_expected.md
-meaning            : 把 DQBUF timeout 从一句话故障变成可行动报告
-verdict=DEBUG_REPORT_WRITTEN

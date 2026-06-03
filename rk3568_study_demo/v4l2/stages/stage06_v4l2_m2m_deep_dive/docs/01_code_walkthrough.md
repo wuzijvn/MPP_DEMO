@@ -1,71 +1,67 @@
 # Stage06 Code Walkthrough
 
-## 主流程解析
-
-基础 demo 的主线是：先看完整 decoder ioctl sequence，再拆成格式协商、buffer 生命周期、QBUF/DQBUF loop、SOURCE_CHANGE/EOS/drain、debug report。企业项目再把这些动作收敛成一个可 gate 的诊断服务。
-
-## 关键结构体解析
-
-| 结构体 | 字段重点 | 生命周期 | 工作中在哪里见到 |
-| --- | --- | --- | --- |
-| `v4l2_capability` | `driver/card/capabilities/device_caps` | `QUERYCAP` 成功后有效 | 设备节点发现、bring-up report |
-| `v4l2_format` | `type/pixelformat/width/height/sizeimage/bytesperline` | `TRY_FMT/S_FMT` 前后对比 | 格式协商、resolution change |
-| `QueueCounters` | qbuf/dqbuf/poll/timeout/source_change/eos | demo 单次运行 | 快速判断 queue loop 是否真的动了 |
-| `PipelineMetrics` | counter + gate + failure_layer | 企业项目单次运行 | 自动化回归和 debug report 附件 |
-| `StateMachine` | `PipelineState` history | 企业项目全流程 | 复盘状态机是否漏了 STREAMOFF/RECOVERY |
-
-## 关键函数解析
-
-| 函数 | 输入输出 | 所有权/状态变化 | 驱动影子线 |
-| --- | --- | --- | --- |
-| `xioctl(fd, request, arg)` | V4L2 fd + ioctl 参数 | 用户态进入驱动 ioctl 回调 | V4L2 ioctl ops |
-| `open_video_node()` | `/dev/videoX` -> fd | 创建用户态 fd | driver open/session |
-| `negotiate_one()` | queue type + fourcc + size | TRY/S_FMT 后驱动可回填格式 | driver format negotiation |
-| `run_queue_loop()` | CLI config -> metrics | QBUF/DQBUF counter 变化 | vb2 buffer state + completion |
-| `GateEvaluator::evaluate()` | config + metrics | 写入 pass/fail verdict | 把症状映射到诊断层级 |
-
-## 数据流和所有权解析
+## 主流程
 
 ```text
-USER owns OUTPUT buffer
-  -> fill compressed payload, bytesused > 0
-  -> VIDIOC_QBUF OUTPUT
-DRIVER owns OUTPUT buffer
-  -> firmware/driver consumes bitstream
-  -> VIDIOC_DQBUF OUTPUT
-USER owns OUTPUT buffer again
-
-USER owns CAPTURE buffer
-  -> VIDIOC_QBUF CAPTURE empty buffer
-DRIVER owns CAPTURE buffer
-  -> VPU writes decoded frame
-  -> IRQ/worker marks buffer done
-  -> poll wakes user
-  -> VIDIOC_DQBUF CAPTURE
-USER owns decoded frame buffer again
+open
+  -> VIDIOC_QUERYCAP
+  -> VIDIOC_ENUM_FMT
+  -> VIDIOC_S_FMT OUTPUT/CAPTURE
+  -> VIDIOC_REQBUFS
+  -> VIDIOC_QUERYBUF
+  -> mmap
+  -> VIDIOC_QBUF OUTPUT/CAPTURE
+  -> VIDIOC_STREAMON
+  -> poll
+  -> VIDIOC_DQBUF OUTPUT/CAPTURE
+  -> requeue
+  -> VIDIOC_STREAMOFF
+  -> munmap
+  -> VIDIOC_REQBUFS count=0
+  -> close
 ```
 
-## 错误路径和资源释放解析
+## 关键文件
 
-1. `open` 失败：检查节点存在和权限。
-2. `QUERYCAP` 成功但不是 M2M：不能当 codec 节点继续真实解码。
-3. `S_FMT` 失败：检查 queue type、fourcc、尺寸、单/多平面。
-4. `QBUF` 失败：检查 buffer index、bytesused、memory type、plane size。
-5. `DQBUF` timeout：先看 OUTPUT/CAPTURE 是否都已 QBUF，再看 dmesg/IRQ/PM。
-6. `SOURCE_CHANGE`：必须重配 CAPTURE queue，不能沿用旧 buffer。
-7. cleanup：真实路径要 `STREAMOFF -> munmap -> REQBUFS 0 -> close`。
+| 文件 | 代码重点 | 驱动影子线 |
+| --- | --- | --- |
+| `00_stage06_m2m_common.hpp` | `xioctl`、format、buffer、poll helper | ioctl ops、vb2 queue、waitqueue |
+| `01_vm_vim2m_device_discovery.cpp` | `QUERYCAP/ENUM_FMT` | 设备节点分类 |
+| `02_vm_vim2m_format_negotiation.cpp` | `TRY_FMT/S_FMT` | format negotiation |
+| `03_vm_vim2m_mmap_lifecycle.cpp` | `REQBUFS/QUERYBUF/MMAP` | vb2 buffer allocation/mapping |
+| `04_vm_vim2m_queue_loop.cpp` | `QBUF/DQBUF/poll/requeue` | buffer ownership and completion |
+| `05_vm_vim2m_fault_injection.cpp` | `bytesused=0`、unsupported format、poll without streamon | errno、format fallback、timeout |
+| `06_rk_board_rkmpp_hardware_path.cpp` | FFmpeg/RKMPP evidence command | vendor stack/hardware path |
+| `enterprise_project/src/06_m2m_diagnostic_service.cpp` | 双模式服务、恢复、gate | bring-up diagnostic service |
 
-## 工作中对应的真实场景
+## OUTPUT/CAPTURE 所有权
 
-1. FFmpeg V4L2 M2M 硬解 wrapper 不出帧。
-2. GStreamer v4l2 decoder pipeline link 成功但运行后 timeout。
-3. RK/高通/MTK 平台 codec 节点与 camera 节点混淆。
-4. 720p 正常，切换 1080p 或码流中途分辨率变化后卡住。
-5. EOS 后最后几帧没有输出。
+```text
+USER fills OUTPUT buffer
+  -> QBUF OUTPUT
+DRIVER owns OUTPUT buffer
+  -> DQBUF OUTPUT
+USER owns OUTPUT buffer again
 
-## 下一步可以怎么改
+USER gives empty CAPTURE buffer
+  -> QBUF CAPTURE
+DRIVER owns CAPTURE buffer
+  -> poll wakes
+  -> DQBUF CAPTURE
+USER owns completed CAPTURE buffer again
+```
 
-1. 给 `02_format_negotiation_probe` 增加 `ENUM_FMT` 列表输出。
-2. 给企业项目接入真实 `REQBUFS/MMAP`，先只申请 buffer 不解码。
-3. 接入 Annex B parser，把每个 NALU 作为 OUTPUT payload 规划。
-4. 真实 DQBUF 后 dump 前几帧 CAPTURE metadata。
+在 `vim2m` 中，OUTPUT/CAPTURE 都是 raw frame buffer。真实 codec decoder 中，OUTPUT 通常是 compressed bitstream packet，CAPTURE 是 decoded raw frame。
+
+## 故障路径
+
+| 故障 | VM/vim2m 代码必须做什么 | 观察 |
+| --- | --- | --- |
+| `bytesused_zero` | 真实 `VIDIOC_QBUF OUTPUT bytesused=0` | driver 接受或拒绝都记录 verdict |
+| `unsupported_format` | 真实 `VIDIOC_S_FMT H264` | 失败或回填成 RGBP 都算捕获 |
+| `timeout` | 真实 `poll(0)` 和恢复 `STREAMOFF/QBUF/STREAMON` | `PASS_WITH_RECOVERY_EVIDENCE` |
+| `source_change` | 真实 CAPTURE `STREAMOFF/REQBUFS 0/S_FMT/REQBUFS/QBUF/STREAMON` | 训练重配顺序 |
+
+## Stage03 到 Stage06 的差异
+
+Stage03 看到 capability 和格式列表就能结束；Stage06 必须能证明 buffer 进入驱动、驱动完成 buffer、用户态拿回 buffer，并且异常时资源释放顺序正确。

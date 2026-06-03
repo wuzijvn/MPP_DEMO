@@ -1,0 +1,6 @@
+Stage06 Demo05: VM vim2m real fault injection
+device                   : /dev/video0
+inject                   : bytesused_zero
+QBUF VIDEO_OUTPUT        : index=0, bytesused=0
+fault_result
+verdict=PASS_FAULT_BYTESUSED_ZERO_REACHED_DRIVER

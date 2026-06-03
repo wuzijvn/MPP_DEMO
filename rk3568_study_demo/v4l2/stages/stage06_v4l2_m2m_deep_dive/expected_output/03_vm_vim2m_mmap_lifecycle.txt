@@ -1,0 +1,10 @@
+Stage06 Demo03: VM vim2m real MMAP buffer lifecycle
+device                   : /dev/video0
+format                   : RGBP -> RGBP
+REQBUFS VIDEO_OUTPUT
+REQBUFS VIDEO_CAPTURE
+MMAP VIDEO_OUTPUT
+MMAP VIDEO_CAPTURE
+mapped_output                    = 3
+mapped_capture                   = 4
+verdict=PASS_VM_MMAP_LIFECYCLE

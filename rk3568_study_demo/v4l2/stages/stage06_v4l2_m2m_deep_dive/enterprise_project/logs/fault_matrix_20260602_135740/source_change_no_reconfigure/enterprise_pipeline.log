@@ -1,0 +1,8 @@
+[INFO][config] mode=vm-vim2m, device=/dev/video0, output_dir=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive/enterprise_project/logs/fault_matrix_20260602_135740/source_change_no_reconfigure, inject=source_change_no_reconfigure, input=(none), decoder=h264_rkmpp, output_fourcc=RGBP, capture_fourcc=RGBP, size=640x480, frames=8, output_depth=3, capture_depth=4, timeout_at=-1, source_change_at=3, bytesused_zero_at=-1, timeout_ms=1000, recover=no, require_device=yes, require_rkmpp=no
+[INFO][mode] VM vim2m: real V4L2 M2M ioctl path
+[INFO][device] opened /dev/video0
+[INFO][querycap] driver=vim2m, card=vim2m, active_caps=0x4208000, m2m_capable=yes, streaming_capable=yes
+[INFO][format] OUTPUT=RGBP, CAPTURE=RGBP, size=640x480
+[WARN][source_change] vim2m has no codec SOURCE_CHANGE event; this path still runs real CAPTURE STREAMOFF/REQBUFS/S_FMT/STREAMON
+[ERROR][source_change] recovery disabled; stop after source-change fault
+[INFO][gate] mode=vm-vim2m, real_ioctl_path=yes, decoded_frames=2, qbuf_output=5, qbuf_capture=6, dqbuf_output=2, dqbuf_capture=2, mapped_output=3, mapped_capture=4, poll_calls=2, timeout_count=1, bytesused_zero_count=0, unsupported_format_rejected=no, m2m_capable=yes, streaming_capable=yes, rk_decoder_seen=no, rk_decode_command_ok=no, source_change_count=1, recovery_count=0, gate_pass=no, verdict=FAIL_TIMEOUT_OVER_LIMIT, failure_layer=driver_or_hardware_completion

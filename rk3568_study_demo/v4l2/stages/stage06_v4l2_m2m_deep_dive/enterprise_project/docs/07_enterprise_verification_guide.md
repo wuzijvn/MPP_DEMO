@@ -1,14 +1,12 @@
 # Enterprise Verification Guide
 
-## 构建验证
+## 构建
 
 ```bash
 ./build.sh all
 ```
 
-通过标准：生成 `bin/07_enterprise_m2m_diagnostic_service`。
-
-## 正常路径验证
+## VM/vim2m 正常路径
 
 ```bash
 ./scripts/run_07_enterprise_m2m_diagnostic_service.sh
@@ -18,10 +16,10 @@
 
 1. exit code 为 0。
 2. 输出 `enterprise_verdict=PASS_NORMAL_PATH`。
-3. `logs/run_default/enterprise_metrics.json` 存在。
-4. JSON 中 `gate_pass=true`。
+3. JSON 中 `real_ioctl_path=true`。
+4. JSON 中 `mapped_output/mapped_capture/qbuf_output/qbuf_capture/dqbuf_output/dqbuf_capture` 都大于 0。
 
-## 故障矩阵验证
+## 故障矩阵
 
 ```bash
 ./scripts/run_07_enterprise_fault_matrix.sh
@@ -29,46 +27,52 @@
 
 通过标准：
 
-1. `normal` 通过。
-2. `timeout_recovered` 通过，并带恢复证据。
-3. `bytesused_zero` 失败，失败层为 `v4l2_queue_payload`。
-4. `source_change_recovered` 通过。
-5. `source_change_no_reconfigure` 失败，失败层为 `driver_or_hardware_completion`。
+```text
+normal                       PASS_NORMAL_PATH
+timeout_recovered            PASS_WITH_RECOVERY_EVIDENCE
+bytesused_zero               FAIL_OUTPUT_BYTESUSED_ZERO
+unsupported_format           PASS_FAULT_UNSUPPORTED_FORMAT_REJECTED
+source_change_recovered      PASS_WITH_RECOVERY_EVIDENCE
+source_change_no_reconfigure FAIL_TIMEOUT_OVER_LIMIT
+rk_rkmpp_evidence            PASS_RK_HARDWARE_PATH_EVIDENCE
+```
 
-## M2M 节点 gate 验证
+## RK/RKMPP 模式
 
 ```bash
-./bin/07_enterprise_m2m_diagnostic_service \
-  --device=/dev/video0 \
-  --require-device \
-  --output-dir=logs/run_require_m2m_gate
+MODE=rk-rkmpp ./scripts/run_07_enterprise_m2m_diagnostic_service.sh
 ```
 
-当前环境预期：
+有码流样本时：
 
-```text
-enterprise_verdict=FAIL_M2M_CAPABILITY_REQUIRED
-failure_layer=device_capability
+```bash
+MODE=rk-rkmpp INPUT=/path/to/sample.h264 DECODER=h264_rkmpp \
+  ./scripts/run_07_enterprise_m2m_diagnostic_service.sh
 ```
 
-原因：当前 `/dev/video0` 是 `rkisp_v5/rkisp_mainpath`，不是 codec M2M。
+要求 RKMPP decoder 必须存在：
 
-## JSON 指标阅读
+```bash
+MODE=rk-rkmpp EXTRA_ARGS="--require-rkmpp" \
+  ./scripts/run_07_enterprise_m2m_diagnostic_service.sh
+```
 
-| 字段 | 含义 | 通过趋势 |
-| --- | --- | --- |
-| `decoded_frames` | 模拟完成帧数 | 大于等于 gate |
-| `qbuf_output` | OUTPUT 投喂次数 | 随帧数增长 |
-| `qbuf_capture` | CAPTURE 空帧 buffer 投喂次数 | 随帧数增长 |
-| `timeout_count` | timeout 次数 | 正常为 0 |
-| `source_change_count` | source change 次数 | 注入时为 1 |
-| `recovery_count` | 恢复次数 | timeout/source-change 恢复时增长 |
-| `m2m_capable` | 节点是否具备 codec M2M 能力 | 真实 codec 节点应为 true |
-| `failure_layer` | 失败层级 | fail 时必须具体 |
+## JSON 指标
 
-## 常见验证误区
+| 字段 | 含义 |
+| --- | --- |
+| `mode` | `vm-vim2m` 或 `rk-rkmpp` |
+| `real_ioctl_path` | VM 模式是否真实执行 ioctl 路径 |
+| `mapped_output/mapped_capture` | mmap 是否覆盖 |
+| `qbuf_output/qbuf_capture` | buffer 是否交给 driver |
+| `dqbuf_output/dqbuf_capture` | buffer 是否从 driver 取回 |
+| `unsupported_format_rejected` | unsupported fourcc 是否被失败或回填捕获 |
+| `rk_decoder_seen` | FFmpeg 是否列出目标 RKMPP decoder |
+| `rk_decode_command_ok` | 提供输入时 RKMPP 命令是否成功 |
+| `failure_layer` | fail 的定位层 |
 
-1. `PASS_NORMAL_PATH` 默认是模拟 queue loop 通过，不等于真实硬解通过。
-2. `/dev/video0` 打开成功不等于 codec M2M 可用。
-3. `source_change_recovered` 通过说明状态机策略正确，不说明真实驱动事件已测试。
-4. `bytesused_zero` 失败是预期行为，说明 gate 能抓住用户态 payload 错误。
+## 常见误区
+
+1. VM `PASS_NORMAL_PATH` 说明 V4L2 M2M queue 逻辑通过，不说明 RK VPU 硬解通过。
+2. RK `PASS_RK_HARDWARE_PATH_EVIDENCE` 默认只说明证据采集成功；要求硬解必须加输入和 `--require-rkmpp`。
+3. `unsupported_format` 可能表现为 ioctl 失败，也可能表现为驱动回填成支持格式，两者都算捕获。

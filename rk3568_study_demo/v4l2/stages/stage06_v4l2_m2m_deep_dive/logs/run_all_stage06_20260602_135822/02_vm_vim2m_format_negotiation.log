@@ -1,0 +1,27 @@
+Stage06 Demo02: VM vim2m real format negotiation
+device                   : /dev/video0
+mode                     : TRY_FMT(safe probe)
+output_fourcc            : RGBP
+capture_fourcc           : RGBP
+size                     : 640x480
+driver                   : vim2m
+card                     : vim2m
+bus_info                 : platform:vim2m
+active_caps_hex          : 0x4208000
+m2m_capable              : yes
+streaming_capable        : yes
+TRY_FMT result:
+type                     : VIDEO_OUTPUT
+width                    : 640
+height                   : 480
+fourcc                   : RGBP
+bytesperline             : 1280
+sizeimage                : 614400
+TRY_FMT result:
+type                     : VIDEO_CAPTURE
+width                    : 640
+height                   : 480
+fourcc                   : RGBP
+bytesperline             : 1280
+sizeimage                : 614400
+verdict=PASS_VM_FORMAT_NEGOTIATION

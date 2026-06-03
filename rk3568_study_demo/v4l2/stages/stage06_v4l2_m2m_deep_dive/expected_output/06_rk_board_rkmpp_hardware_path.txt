@@ -1,0 +1,7 @@
+Stage06 Demo06: RK board RKMPP hardware path evidence collector
+output_dir
+decoder                  : h264_rkmpp
+boundary                 : RK hardware proof uses RKMPP/FFmpeg evidence, not VM vim2m
+ffmpeg_available
+decoder_seen
+verdict=PASS_RK_HARDWARE_PATH_EVIDENCE_COLLECTED

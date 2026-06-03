@@ -1,0 +1,8 @@
+[build] 01_vm_vim2m_device_discovery.cpp -> 01_vm_vim2m_device_discovery
+[build] 02_vm_vim2m_format_negotiation.cpp -> 02_vm_vim2m_format_negotiation
+[build] 03_vm_vim2m_mmap_lifecycle.cpp -> 03_vm_vim2m_mmap_lifecycle
+[build] 04_vm_vim2m_queue_loop.cpp -> 04_vm_vim2m_queue_loop
+[build] 05_vm_vim2m_fault_injection.cpp -> 05_vm_vim2m_fault_injection
+[build] 06_rk_board_rkmpp_hardware_path.cpp -> 06_rk_board_rkmpp_hardware_path
+[build] enterprise m2m diagnostic service
+[build] wrote /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive/enterprise_project/bin/07_enterprise_m2m_diagnostic_service

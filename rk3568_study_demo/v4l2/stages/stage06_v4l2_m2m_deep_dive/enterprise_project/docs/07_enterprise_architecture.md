@@ -1,20 +1,22 @@
 # Enterprise Architecture
 
-## 架构图
+## 双模式架构
 
 ```text
 CLI args
   -> CliConfig
   -> M2mDiagnosticService
+      -> mode=vm-vim2m
+          -> real V4L2 ioctl/mmap/qbuf/dqbuf/poll
+      -> mode=rk-rkmpp
+          -> FFmpeg/RKMPP/device/dmesg evidence
       -> StateMachine
       -> Logger
-      -> simulated V4L2 M2M queue loop
-      -> fault injection
+      -> PipelineMetrics JSON
       -> GateEvaluator
-      -> MetricsSink JSON
 ```
 
-## 状态机
+## VM/vim2m 状态机
 
 ```text
 INIT
@@ -30,50 +32,32 @@ INIT
   -> STOPPED
 ```
 
-失败时进入：
+## RK/RKMPP 状态机
 
 ```text
-RUNNING/SOURCE_CHANGE/OPEN_DEVICE -> FAILED
+INIT
+  -> OPEN_DEVICE          # collect board evidence, not V4L2 codec open
+  -> RUNNING              # optional FFmpeg RKMPP decode command
+  -> STOPPED
 ```
 
-## 数据流
+## Gate 差异
 
-```text
-frame loop:
-  QBUF OUTPUT compressed packet
-  QBUF CAPTURE empty frame
-  poll
-  DQBUF OUTPUT consumed packet
-  DQBUF CAPTURE decoded frame
-  update metrics
-```
+| 模式 | 必须通过的证据 |
+| --- | --- |
+| `vm-vim2m` | `real_ioctl_path=true`、M2M+streaming capability、mmap/qbuf/dqbuf counters |
+| `rk-rkmpp` | 板端证据文件生成；若 `--require-rkmpp`，decoder 必须存在；若提供 `--input`，命令必须成功 |
 
 ## 故障注入
 
-| 注入 | 触发 | 预期恢复 | gate |
-| --- | --- | --- | --- |
-| `timeout` | 指定帧 poll timeout | STREAMOFF/cleanup/STREAMON | 可通过，若 allowed_timeouts 足够 |
-| `bytesused_zero` | OUTPUT payload 长度为 0 | 不恢复，直接失败 | `FAIL_OUTPUT_BYTESUSED_ZERO` |
-| `source_change` | 分辨率/stride 变化 | CAPTURE 重配 | 可通过 |
-| `source_change_no_reconfigure` | 事件后不重配 | timeout | `FAIL_TIMEOUT_OVER_LIMIT` |
-
-## 驱动影子线映射
-
-| 用户态状态 | 驱动侧概念 | 诊断证据 |
+| 注入 | 真实动作 | gate |
 | --- | --- | --- |
-| OPEN_DEVICE | file_operations.open/session | fd、driver/card |
-| QUERYCAP | V4L2 capability | `m2m_capable` |
-| FORMAT_NEGOTIATION | s_fmt/try_fmt | fourcc/size/stride |
-| BUFFER_SETUP | vb2 queue setup | buffer count |
-| STREAMING | streamon + m2m scheduler | stream state |
-| RUNNING | QBUF/DQBUF + job completion | qbuf/dqbuf counters |
-| SOURCE_CHANGE | decoder event/reconfig | source_change_count |
-| RECOVERY | streamoff/reset/requeue | recovery_count |
-| DRAINING | DPB flush/LAST buffer | eos_count/dqbuf_capture |
+| `timeout` | `poll(0)` + real `STREAMOFF/QBUF/STREAMON` recovery | `PASS_WITH_RECOVERY_EVIDENCE` |
+| `bytesused_zero` | real `VIDIOC_QBUF OUTPUT bytesused=0` | `FAIL_OUTPUT_BYTESUSED_ZERO` |
+| `unsupported_format` | real `VIDIOC_S_FMT H264` and check returned fourcc | `PASS_FAULT_UNSUPPORTED_FORMAT_REJECTED` |
+| `source_change` | real CAPTURE queue reconfiguration sequence | `PASS_WITH_RECOVERY_EVIDENCE` |
+| `source_change_no_reconfigure` | stop without reconfigure | `FAIL_TIMEOUT_OVER_LIMIT` |
 
-## 真实工作如何使用这套结构
+## 工作价值
 
-1. 默认先跑模拟路径，确认工具和 gate 正常。
-2. 指定候选 `/dev/videoX`，看 `m2m_capable`。
-3. 找到真实 M2M 节点后，把 service 的模拟 buffer loop 替换成真实 ioctl。
-4. 保留同样的 `PipelineMetrics`，这样真实路径和模拟路径可以共用报告格式。
+企业版不再只训练“会打印流程”，而是把真实 V4L2 M2M queue 行为变成可回归的 JSON 指标；同时保留 RK 板硬件路径入口，让板端验证和 VM 学习互不冒充。

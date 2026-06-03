@@ -1,48 +1,43 @@
 # Stage06 Acceptance Checklist
 
-## 功能性证明
+## VM/vim2m
 
 1. `./build.sh all-with-enterprise` 成功。
-2. `./scripts/run_all_stage06.sh` 6 个基础 demo 全部 PASS。
-3. `./enterprise_project/scripts/run_07_enterprise_m2m_diagnostic_service.sh` 输出 `enterprise_verdict=PASS_NORMAL_PATH`。
-4. `./enterprise_project/scripts/run_07_enterprise_fault_matrix.sh` 生成 `summary.tsv`。
+2. `./scripts/run_all_stage06.sh` 全部 PASS。
+3. Demo04 日志里能看到真实 `QBUF`、`STREAMON`、`poll`、`DQBUF`、`STREAMOFF`。
+4. 企业服务 JSON 中 `real_ioctl_path=true`。
+5. 企业服务 JSON 中 `mapped_output/mapped_capture/qbuf_output/qbuf_capture/dqbuf_output/dqbuf_capture` 都大于 0。
 
-## 指标证明
+## RK/RKMPP
 
-1. 正常路径：`decoded_frames >= min_decoded_frames`。
-2. timeout 恢复路径：`timeout_count=1` 且 `recovery_count=1`，verdict 为 `PASS_WITH_RECOVERY_EVIDENCE`。
-3. bytesused 故障：verdict 为 `FAIL_OUTPUT_BYTESUSED_ZERO`。
-4. source change 未重配：verdict 为 `FAIL_TIMEOUT_OVER_LIMIT`。
-5. 当前 `/dev/video0`：`m2m_capable=no`，`--require-device` 时应 fail 在 `device_capability`。
+1. `./scripts/run_06_rk_board_rkmpp_hardware_path.sh` 能生成 `rk_rkmpp_report.md`。
+2. 如果有 RKMPP decoder 和输入码流，`INPUT=/path/to/sample.h264 DECODER=h264_rkmpp ./scripts/run_06_rk_board_rkmpp_hardware_path.sh` 应实际运行 FFmpeg 命令。
+3. 如果没有 RKMPP decoder，默认只给证据采集 PASS；加 `--require-rkmpp` 或企业 `--require-rkmpp` 时应 fail。
+4. 不把 `vim2m` 成功解释成 RK 硬解成功。
 
-## 解释性证明
+## 上线后调试教程
 
-你需要能解释：
+1. `docs/06_post_code_debugging_guide.md` 必须存在，并且是手动跟练教程，不是脚本替代。
+2. 能按教程收集 CPU/thread、耗时、RSS/VSZ、fd 数量、mmap/munmap、QBUF/DQBUF counters、timeout、RK dmesg/decoder evidence。
+3. 能解释高 CPU、耗时高、内存涨、fd 泄漏、mmap 泄漏、queue stall、software fallback 分别应优先看哪些证据。
+4. 能填出教程里的 debug report 模板，并把问题初步分到 user-space、framework、V4L2 queue、driver、power、hardware 或 input bitstream。
 
-1. decoder 的 OUTPUT/CAPTURE 分别放什么。
-2. `QBUF` 和 `DQBUF` 的所有权方向。
-3. 为什么 `bytesused=0` 不能怪驱动。
-4. 为什么 source change 必须重配 CAPTURE queue。
-5. 为什么 EOS 后仍要 drain。
-6. 为什么有 `/dev/video0` 不代表有 codec M2M。
+## 必须能解释
 
-## 驱动影子线证明
+1. 为什么 `vim2m` 能验证 M2M 队列逻辑，但不能证明 codec 硬解。
+2. Stage03 只到 capability/format，Stage06 为什么要继续跑 mmap 和 queue loop。
+3. `QBUF` 与 `DQBUF` 的 buffer 所有权方向。
+4. `bytesused=0` 在 OUTPUT queue 上为什么危险。
+5. source change 为什么要重配 CAPTURE queue。
+6. RK 板为什么优先看 RKMPP/FFmpeg/厂商路径，而不是强行跑 V4L2 M2M codec ioctl。
 
-你需要能说清：
-
-1. `open` 进入驱动 file operation。
-2. `S_FMT` 进入驱动格式协商。
-3. `REQBUFS/MMAP` 由 videobuf2 管 buffer。
-4. `QBUF/DQBUF` 对应 vb2 buffer 状态变化。
-5. `poll` 依赖 waitqueue wakeup，通常由 IRQ/worker completion 驱动。
-6. timeout 可能涉及 firmware、IRQ、runtime PM、reset recovery。
-
-## 通过/不通过
+## 通过标准
 
 | 条件 | 结论 |
 | --- | --- |
-| 基础 demo PASS + 企业正常 PASS + 能解释 OUTPUT/CAPTURE | Stage06 基础通过 |
-| fault matrix 能解释每个 fail/pass 原因 | Stage06 工作化通过 |
-| 能用 `--require-device` 识别非 M2M 节点 | Stage06 设备分类通过 |
-| 不能解释 `bytesused` 和 source change | 不通过，需要回看 demo04/demo05 |
-| 只说“driver bug”但没有 counter/dmesg/report | 不通过，需要回看 demo06 |
+| VM 全跑 PASS，企业 VM PASS | Stage06 VM 逻辑通过 |
+| fault matrix 能解释每个 pass/fail | Stage06 工作化通过 |
+| RK 证据脚本能区分 decoder 是否存在 | RK 适配通过 |
+| 能按调试教程解释 CPU/耗时/内存/fd/mmap/queue/RK 证据 | 上线后调试能力通过 |
+| 只看到 `QUERYCAP` 就说完成 Stage06 | 不通过 |
+| 把 VM `vim2m` 当硬解证明 | 不通过 |

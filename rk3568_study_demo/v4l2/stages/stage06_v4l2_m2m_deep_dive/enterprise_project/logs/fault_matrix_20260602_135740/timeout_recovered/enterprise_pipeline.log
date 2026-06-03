@@ -1,0 +1,7 @@
+[INFO][config] mode=vm-vim2m, device=/dev/video0, output_dir=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive/enterprise_project/logs/fault_matrix_20260602_135740/timeout_recovered, inject=timeout, input=(none), decoder=h264_rkmpp, output_fourcc=RGBP, capture_fourcc=RGBP, size=640x480, frames=8, output_depth=3, capture_depth=4, timeout_at=3, source_change_at=-1, bytesused_zero_at=-1, timeout_ms=1000, recover=yes, require_device=yes, require_rkmpp=no
+[INFO][mode] VM vim2m: real V4L2 M2M ioctl path
+[INFO][device] opened /dev/video0
+[INFO][querycap] driver=vim2m, card=vim2m, active_caps=0x4208000, m2m_capable=yes, streaming_capable=yes
+[INFO][format] OUTPUT=RGBP, CAPTURE=RGBP, size=640x480
+[WARN][timeout] zero-timeout poll observed no ready buffer at frame=3
+[INFO][gate] mode=vm-vim2m, real_ioctl_path=yes, decoded_frames=8, qbuf_output=14, qbuf_capture=16, dqbuf_output=8, dqbuf_capture=8, mapped_output=3, mapped_capture=4, poll_calls=9, timeout_count=1, bytesused_zero_count=0, unsupported_format_rejected=no, m2m_capable=yes, streaming_capable=yes, rk_decoder_seen=no, rk_decode_command_ok=no, source_change_count=0, recovery_count=1, gate_pass=yes, verdict=PASS_WITH_RECOVERY_EVIDENCE, failure_layer=none

@@ -1,0 +1,11 @@
+Stage06 Demo04: VM vim2m real QBUF/DQBUF/poll queue loop
+device                   : /dev/video0
+format                   : RGBP -> RGBP
+QBUF VIDEO_CAPTURE
+QBUF VIDEO_OUTPUT
+STREAMON                 : VIDEO_CAPTURE
+STREAMON                 : VIDEO_OUTPUT
+poll                     : ret=1
+DQBUF VIDEO_CAPTURE
+DQBUF VIDEO_OUTPUT
+verdict=PASS_VM_REAL_QUEUE_LOOP

@@ -1,5 +1,0 @@
-Stage06 Demo06: timeout debug report template
-scenario           : dqbuf_timeout
-report             : /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive/logs/06_timeout_debug_report.md
-meaning            : 把 DQBUF timeout 从一句话故障变成可行动报告
-verdict=DEBUG_REPORT_WRITTEN

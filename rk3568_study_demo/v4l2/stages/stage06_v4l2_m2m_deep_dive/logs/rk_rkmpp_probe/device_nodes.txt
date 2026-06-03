@@ -1,0 +1,8 @@
+crw-rw----+ 1 root video  226,   0 May 29 09:12 /dev/dri/card0
+crw-rw----+ 1 root render 226, 128 May 13 18:08 /dev/dri/renderD128
+crw-rw----+ 1 root video   81,   0 May 14 16:14 /dev/video0
+
+/dev/dri/by-path:
+总用量 0
+lrwxrwxrwx 1 root root  8 May 29 09:12 pci-0000:00:0f.0-card -> ../card0
+lrwxrwxrwx 1 root root 13 May 13 18:08 pci-0000:00:0f.0-render -> ../renderD128

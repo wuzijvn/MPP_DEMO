@@ -1,0 +1,82 @@
+crw-rw----+ 1 root video  226,   0 May 29 09:12 /dev/dri/card0
+crw-rw----+ 1 root render 226, 128 May 13 18:08 /dev/dri/renderD128
+crw-rw----+ 1 root video   81,   0 May 14 16:14 /dev/video0
+
+/dev/dri/by-path:
+总用量 0
+lrwxrwxrwx 1 root root  8 May 29 09:12 pci-0000:00:0f.0-card -> ../card0
+lrwxrwxrwx 1 root root 13 May 13 18:08 pci-0000:00:0f.0-render -> ../renderD128
+vim2m (platform:vim2m):
+	/dev/video0
+
+ V..... h263_v4l2m2m         V4L2 mem2mem H.263 decoder wrapper (codec h263)
+ VFS..D h264                 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10
+ V..... h264_v4l2m2m         V4L2 mem2mem H.264 decoder wrapper (codec h264)
+ V..... h264_cuvid           Nvidia CUVID H264 decoder (codec h264)
+ VFS..D hevc                 HEVC (High Efficiency Video Coding)
+ V..... hevc_v4l2m2m         V4L2 mem2mem HEVC decoder wrapper (codec hevc)
+ V..... hevc_cuvid           Nvidia CUVID HEVC decoder (codec hevc)
+ V..... mpeg1_v4l2m2m        V4L2 mem2mem MPEG1 decoder wrapper (codec mpeg1video)
+ V..... mpeg2_v4l2m2m        V4L2 mem2mem MPEG2 decoder wrapper (codec mpeg2video)
+ V..... mpeg4_v4l2m2m        V4L2 mem2mem MPEG4 decoder wrapper (codec mpeg4)
+ V..... vc1_v4l2m2m          V4L2 mem2mem VC1 decoder wrapper (codec vc1)
+ V..... vp8_v4l2m2m          V4L2 mem2mem VP8 decoder wrapper (codec vp8)
+ V..... vp9_v4l2m2m          V4L2 mem2mem VP9 decoder wrapper (codec vp9)
+[    0.007245]   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+[    0.007248]   DMA32    [mem 0x0000000001000000-0x00000000ffffffff]
+[    0.007260] On node 0, zone DMA: 1 pages in unavailable ranges
+[    0.007744] On node 0, zone DMA: 98 pages in unavailable ranges
+[    0.017254] On node 0, zone DMA32: 48 pages in unavailable ranges
+[    0.122347] Calibrating delay loop (skipped) preset value.. 4838.41 BogoMIPS (lpj=9676820)
+[    0.148124] DMA: preallocated 512 KiB GFP_KERNEL pool for atomic allocations
+[    0.148232] DMA: preallocated 512 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+[    0.148265] DMA: preallocated 512 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[    0.163911] ACPI: [Firmware Bug]: BIOS _OSI(Linux) query ignored
+[    0.459259] iommu: Default domain type: Translated 
+[    0.459259] iommu: DMA domain TLB invalidation policy: lazy mode 
+[    0.527055] PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+[    0.602884] ata1: PATA max UDMA/33 cmd 0x1f0 ctl 0x3f6 bmdma 0x1060 irq 14
+[    0.602886] ata2: PATA max UDMA/33 cmd 0x170 ctl 0x376 bmdma 0x1068 irq 15
+[    0.955801] ata3: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee100 irq 56
+[    0.955810] ata4: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee180 irq 56
+[    0.955811] ata5: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee200 irq 56
+[    0.955811] ata6: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee280 irq 56
+[    0.955812] ata7: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee300 irq 56
+[    0.955812] ata8: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee380 irq 56
+[    0.955812] ata9: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee400 irq 56
+[    0.955813] ata10: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee480 irq 56
+[    0.955813] ata11: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee500 irq 56
+[    0.955814] ata12: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee580 irq 56
+[    0.955814] ata13: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee600 irq 56
+[    0.955814] ata14: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee680 irq 56
+[    0.955815] ata15: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee700 irq 56
+[    0.955815] ata16: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee780 irq 56
+[    0.955816] ata17: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee800 irq 56
+[    0.955816] ata18: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee880 irq 56
+[    0.955816] ata19: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee900 irq 56
+[    0.955817] ata20: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5ee980 irq 56
+[    0.955817] ata21: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5eea00 irq 56
+[    0.955817] ata22: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5eea80 irq 56
+[    0.955818] ata23: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5eeb00 irq 56
+[    0.955818] ata24: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5eeb80 irq 56
+[    0.955818] ata25: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5eec00 irq 56
+[    0.955819] ata26: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5eec80 irq 56
+[    0.955819] ata27: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5eed00 irq 56
+[    0.955819] ata28: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5eed80 irq 56
+[    0.955820] ata29: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5eee00 irq 56
+[    0.955820] ata30: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5eee80 irq 56
+[    0.955820] ata31: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5eef00 irq 56
+[    0.955821] ata32: SATA max UDMA/133 abar m4096@0xfd5ee000 port 0xfd5eef80 irq 56
+[    1.279927] ata4.00: ATAPI: VMware Virtual SATA CDRW Drive, 00000001, max UDMA/33
+[    1.280025] ata4.00: configured for UDMA/33
+[    1.843291] vmwgfx 0000:00:0f.0: [drm] DMA map mode: Caching DMA mappings.
+[    1.843919] vmwgfx 0000:00:0f.0: [drm] Capabilities2: grow otable, intra surface copy, dx2, gb memsize 2, screendma reg, otable ptdepth2, non ms to ms stretchblt, cursor mob, mshint, cb max size 4mb, dx3, frame type, trace full fb, extra regs, lo staging, 
+[    1.849017] vmwgfx 0000:00:0f.0: [drm] Using command buffers with DMA pool.
+[INFO][config] mode=rk-rkmpp, device=/dev/video0, output_dir=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive/enterprise_project/logs/fault_matrix_20260602_135740/rk_rkmpp_evidence, inject=none, input=(none), decoder=h264_rkmpp, output_fourcc=RGBP, capture_fourcc=RGBP, size=640x480, frames=8, output_depth=3, capture_depth=4, timeout_at=-1, source_change_at=-1, bytesused_zero_at=-1, timeout_ms=1000, recover=yes, require_device=no, require_rkmpp=no
+[INFO][mode] RK board: RKMPP/FFmpeg hardware evidence path
+[INFO][rk] ffmpeg_available=yes
+[INFO][rk] decoder=h264_rkmpp, decoder_seen=no
+[INFO][gate] mode=rk-rkmpp, real_ioctl_path=no, decoded_frames=0, qbuf_output=0, qbuf_capture=0, dqbuf_output=0, dqbuf_capture=0, mapped_output=0, mapped_capture=0, poll_calls=0, timeout_count=0, bytesused_zero_count=0, unsupported_format_rejected=no, m2m_capable=no, streaming_capable=no, rk_decoder_seen=no, rk_decode_command_ok=no, source_change_count=0, recovery_count=0, gate_pass=yes, verdict=PASS_RK_HARDWARE_PATH_EVIDENCE, failure_layer=none
+enterprise_log=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive/enterprise_project/logs/fault_matrix_20260602_135740/rk_rkmpp_evidence/enterprise_pipeline.log
+enterprise_metrics=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive/enterprise_project/logs/fault_matrix_20260602_135740/rk_rkmpp_evidence/enterprise_metrics.json
+enterprise_verdict=PASS_RK_HARDWARE_PATH_EVIDENCE

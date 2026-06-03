@@ -1,0 +1,29 @@
+Stage06 Demo01: VM vim2m device discovery with real ioctl
+device                   : /dev/video0
+boundary                 : validates V4L2 M2M node capability; does not prove codec hardware decode
+driver                   : vim2m
+card                     : vim2m
+bus_info                 : platform:vim2m
+active_caps_hex          : 0x4208000
+m2m_capable              : yes
+streaming_capable        : yes
+
+OUTPUT formats from real VIDIOC_ENUM_FMT:
+  [0] RGBP - 16-bit RGB 5-6-5
+  [1] RGBR - 16-bit RGB 5-6-5 BE
+  [2] RGB3 - 24-bit RGB 8-8-8
+  [3] BGR3 - 24-bit BGR 8-8-8
+
+CAPTURE formats from real VIDIOC_ENUM_FMT:
+  [0] RGBP - 16-bit RGB 5-6-5
+  [1] RGBR - 16-bit RGB 5-6-5 BE
+  [2] RGB3 - 24-bit RGB 8-8-8
+  [3] BGR3 - 24-bit BGR 8-8-8
+  [4] YUYV - YUYV 4:2:2
+  [5] BA81 - 8-bit Bayer BGBG/GRGR
+  [6] GBRG - 8-bit Bayer GBGB/RGRG
+  [7] GRBG - 8-bit Bayer GRGR/BGBG
+  [8] RGGB - 8-bit Bayer RGRG/GBGB
+output_format_count      : 4
+capture_format_count     : 9
+verdict=PASS_VM_M2M_DEVICE_DISCOVERY

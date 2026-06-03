@@ -3,6 +3,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC_DIR="${SCRIPT_DIR}/src"
 INC_DIR="${SCRIPT_DIR}/include"
+STAGE_INC_DIR="$(cd "${SCRIPT_DIR}/../include" && pwd)"
 BIN_DIR="${SCRIPT_DIR}/bin"
 CXX="${CXX:-g++}"
 CXXFLAGS="${CXXFLAGS:--std=c++11 -O2 -Wall -Wextra}"
@@ -14,7 +15,7 @@ case "${cmd}" in
   all|07_enterprise_m2m_diagnostic_service)
     mkdir -p "${BIN_DIR}"
     echo "[build] enterprise m2m diagnostic service"
-    "${CXX}" ${CXXFLAGS} -I"${INC_DIR}" \
+    "${CXX}" ${CXXFLAGS} -I"${INC_DIR}" -I"${STAGE_INC_DIR}" \
       "${SRC_DIR}/01_cli_config.cpp" \
       "${SRC_DIR}/02_state_machine.cpp" \
       "${SRC_DIR}/03_logger.cpp" \
