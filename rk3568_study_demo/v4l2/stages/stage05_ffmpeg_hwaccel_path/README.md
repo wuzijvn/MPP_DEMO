@@ -1,5 +1,19 @@
 # Stage05 - FFmpeg Hardware Acceleration Path（完整教学包）
 
+## 当前环境定位
+
+Stage05 是 `RK 板优先` 的真实硬件路径验证阶段。
+
+1. RK 板：默认使用 FFmpeg `h264_rkmpp` / `hevc_rkmpp` 验证真实硬解路径，并用 decoder selection、frame count、software-vs-RKMPP benchmark、dmesg/日志作为证据。
+2. VM：可以学习 FFmpeg hwaccel 的 API 和后端概念，也可以做 VAAPI/V4L2 M2M 框架对照；但 VM 上没有 RKMPP 时，不要求 `h264_rkmpp` 成功。
+3. Stage05 不证明 RK 板存在通用 V4L2 M2M codec 节点；这件事由 Stage06 `run_00_rk_board_reality_check.sh` 判断。
+
+完整双环境路线见：
+
+```bash
+less /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/learning_plan/00_dual_environment_codec_route.md
+```
+
 ## 这个 stage 教什么
 
 本阶段从 Stage04 软件基线进入 FFmpeg 硬件加速路径，按 `01~10` 拆解独立知识点：
@@ -144,6 +158,13 @@ INPUT=./samples/sample.mp4 MAX_FRAMES=120 LOOPS=5 ./scripts/run_10_performance_d
 ldd ./bin/02_create_hwdevice_context | grep -E "libav|libdrm|libva"
 ffmpeg -hide_banner -hwaccels
 ```
+
+## 与 VM V4L2 M2M 学习的关系
+
+1. VM 上的 V4L2 M2M 虚拟节点用于训练通用 Linux codec queue/state-machine。
+2. RK 板上的真实硬件能力以 RKMPP 路径为准。
+3. 报告里不要把 `h264_v4l2m2m`、VM 虚拟 M2M 或模拟结果写成 RKMPP 硬件证据。
+4. 如果 RKMPP 输出 CPU 可见帧，不能只凭 `frame.format=yuv420p` 判定软件 fallback；要看 decoder 名、frame count、性能和日志。
 
 ## 当前环境限制（已实测）
 

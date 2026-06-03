@@ -1,5 +1,14 @@
 # Stage06 Start Here
 
+## 0. 本阶段怎么分环境
+
+| 环境 | 推荐动作 | 通过标准 |
+| --- | --- | --- |
+| VM | 跑基础 demo、enterprise diagnostic service、fault matrix | 能解释 V4L2 M2M 状态机和 timeout/source-change 报告 |
+| RK 板 | 先跑 `run_00_rk_board_reality_check.sh` | 能证明是否存在 M2M codec 节点；没有则切回 Stage05 RKMPP |
+
+不要把 VM 的虚拟 M2M 结果写成 RK 板硬解证据，也不要把 RK 板没有 V4L2 M2M codec 节点写成“V4L2 M2M 学习失败”。
+
 ## RK 板端先跑
 
 ```bash
@@ -36,3 +45,13 @@
 ## 当前环境提醒
 
 当前运行中 `/dev/video0` 可以打开，但 `QUERYCAP` 显示 `driver=rkisp_v5, card=rkisp_mainpath, m2m_capable=no`。这说明它是 ISP/capture 节点，不是 codec M2M 节点。Stage06 默认仍可用模拟模式训练队列和报告能力；要验证真实 VPU codec，需要找到具备 `V4L2_CAP_VIDEO_M2M` 或 `V4L2_CAP_VIDEO_M2M_MPLANE` 的节点。
+
+## 报告环境头模板
+
+```text
+environment=VM|RK_BOARD
+backend=v4l2_m2m_virtual|simulation|rkmpp|no_v4l2_m2m_codec_node
+hardware_proof=yes|no
+what_this_proves=...
+what_this_does_not_prove=...
+```

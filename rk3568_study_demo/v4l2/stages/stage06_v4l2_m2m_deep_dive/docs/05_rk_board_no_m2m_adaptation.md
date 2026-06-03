@@ -4,6 +4,8 @@
 
 如果 RK 板子上没有真实 V4L2 M2M codec 字符设备，Stage06 不能按“真实 ioctl 硬解”来跑；应该把 Stage06 当作 V4L2 M2M 状态机/驱动影子线学习，把真实硬解验证切到 RKMPP 路径，例如 FFmpeg `h264_rkmpp` / `hevc_rkmpp`。
 
+这条结论现在是整个 codec 学习计划的正式边界：VM 负责 V4L2 M2M 逻辑，RK 板负责 RKMPP 真实硬件证据。总路线见 `../../../learning_plan/00_dual_environment_codec_route.md`。
+
 ## 当前板端证据
 
 本环境能看到：
@@ -84,6 +86,28 @@ recommended_learning_path=RKMPP_REAL_PATH_PLUS_V4L2_M2M_CONCEPT
 3. Stage05 RKMPP：作为板端真实硬解验证主线。
 4. 后续 Stage07 GStreamer：重点看是否有 `mppvideodec`、`mpph264dec` 或同类 RKMPP 插件，而不是只盯 `v4l2slh264dec`。
 5. 后续 Stage09 DMA-BUF/DRM PRIME：看 RKMPP 输出是否能走 DRM PRIME/zero-copy，而不是 V4L2 DMABUF queue。
+
+## 双环境验收写法
+
+VM 报告写法：
+
+```text
+environment=VM
+backend=v4l2_m2m_virtual
+hardware_proof=no
+what_this_proves=V4L2 M2M ioctl sequence and queue ownership are understood
+what_this_does_not_prove=RK3568 VPU hardware decode performance or RKMPP availability
+```
+
+RK 板报告写法：
+
+```text
+environment=RK_BOARD
+backend=rkmpp
+hardware_proof=yes
+what_this_proves=FFmpeg can use h264_rkmpp/hevc_rkmpp path on this board
+what_this_does_not_prove=A generic V4L2 M2M codec node exists on this board
+```
 
 ## 面试/入职表达模板
 

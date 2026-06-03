@@ -1,5 +1,19 @@
 # Stage06 - V4L2 M2M Deep Dive After FFmpeg Hwaccel
 
+## 当前环境定位
+
+Stage06 是“双环境桥接阶段”：
+
+1. VM：深化 V4L2 M2M stateful decoder 状态机，训练 ioctl sequence、queue ownership、poll timeout、SOURCE_CHANGE、EOS/drain、fault matrix。
+2. RK 板：先做 reality check。如果没有 V4L2 M2M codec 字符设备，Stage06 不要求真实 M2M decode；真实硬解验证回到 Stage05 RKMPP。
+3. 本阶段的核心产出是“你能分清环境和 backend，并写出证据边界清楚的 debug report”。
+
+完整双环境路线见：
+
+```bash
+less /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/learning_plan/00_dual_environment_codec_route.md
+```
+
 ## RK 板端现实适配
 
 当前 RK 板子可能没有可用的 V4L2 M2M codec 字符设备。请先运行：
@@ -9,6 +23,16 @@
 ```
 
 如果输出 `v4l2_m2m_status=NOT_FOUND` 且 `rkmpp_status=AVAILABLE`，说明真实硬解主线应使用 RKMPP（例如 FFmpeg `h264_rkmpp/hevc_rkmpp`），Stage06 用来学习 V4L2 M2M 通用状态机和 debug 方法，不要强行对 rkisp/camera 节点跑 codec ioctl。详细说明见 [docs/05_rk_board_no_m2m_adaptation.md](docs/05_rk_board_no_m2m_adaptation.md)。
+
+RK 板报告必须明确：
+
+```text
+environment=RK_BOARD
+backend=rkmpp 或 no_v4l2_m2m_codec_node
+hardware_proof=yes|no
+what_this_proves=...
+what_this_does_not_prove=...
+```
 
 ## 这个 demo 教什么
 

@@ -1,5 +1,20 @@
 # Stage03 从这里开始（完整执行顺序）
 
+## 0. 先确认你在哪个环境
+
+Stage03 推荐先在 VM 跑，因为 VM 上的虚拟 V4L2 M2M 节点适合训练 codec ioctl 和双队列逻辑。
+
+| 环境 | 这一阶段要做什么 | 不要得出什么结论 |
+| --- | --- | --- |
+| VM | 跑 Stage03 demo，理解 `OUTPUT/CAPTURE`、`QBUF/DQBUF`、`STREAMON/STREAMOFF` | 不要声称 RK VPU 硬解已验证 |
+| RK 板 | 可做节点识别和 reality check | 不要强行把 rkisp/camera 节点当 codec M2M |
+
+完整路线：
+
+```bash
+less /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/learning_plan/00_dual_environment_codec_route.md
+```
+
 ## 1. 编译全部 demo
 
 ```bash
@@ -52,3 +67,13 @@ cd /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage03_v4l2_m2m_codec_foun
 3. 对照 `docs/02_final_checklist.md` 打勾。
 4. 码流桥接学习对照 `docs/10_bitstream_payload_bridge.md`。
 5. 企业级项目对照 `enterprise_project/docs/12_enterprise_verification_guide.md`。
+
+报告开头必须写：
+
+```text
+environment=VM|RK_BOARD
+backend=v4l2_m2m_virtual|simulation|rkmpp|software
+hardware_proof=yes|no
+what_this_proves=...
+what_this_does_not_prove=...
+```
