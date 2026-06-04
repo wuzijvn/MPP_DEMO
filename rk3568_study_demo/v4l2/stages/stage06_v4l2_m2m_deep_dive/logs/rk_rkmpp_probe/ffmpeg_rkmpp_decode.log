@@ -1,0 +1,1 @@
+decode command not run: provide --input and ensure ffmpeg decoder exists

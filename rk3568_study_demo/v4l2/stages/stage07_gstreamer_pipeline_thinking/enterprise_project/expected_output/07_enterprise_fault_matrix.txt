@@ -1,0 +1,7 @@
+| case | status | gate_pass | failure_layer | elapsed_ms | reason |
+| --- | --- | --- | --- | --- | --- |
+| normal_debug_caps | PASS ... | true | success | ... | normal pipeline reached EOS within gate thresholds |
+| caps_failure_expected | PASS ... | true | link_or_caps_negotiation_failure | ... | expected failure reproduced and classified |
+| missing_element_expected | PASS ... | true | missing_element_or_plugin | ... | expected failure reproduced and classified |
+| slow_queue_observation | PASS ... | true | success | ... | normal pipeline reached EOS within gate thresholds |
+| hardware_probe_rkmpp | PASS or FAIL depending on installed backend | ... | ... | ... | ... |

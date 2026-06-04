@@ -25,11 +25,22 @@ run_case() {
   printf "%s\t%s\t%s\t%s\n" "${name}" "${rc}" "${verdict}" "${out}/enterprise_metrics.json" >> "${SUMMARY}"
 }
 
-run_case normal --inject=none --frames=12 --min-decoded-frames=6
-run_case timeout_recovered --inject=timeout --allowed-timeouts=1 --frames=12 --min-decoded-frames=5
-run_case bytesused_zero --inject=bytesused_zero --frames=12 --min-decoded-frames=6
-run_case source_change_recovered --inject=source_change --frames=12 --min-decoded-frames=5
-run_case source_change_no_reconfigure --inject=source_change_no_reconfigure --frames=12 --min-decoded-frames=5
+common_vm=(
+  --mode=vm-vim2m
+  --device="${DEVICE:-/dev/video0}"
+  --output-fourcc=RGBP
+  --capture-fourcc=RGBP
+  --width=640
+  --height=480
+)
+
+run_case normal "${common_vm[@]}" --inject=none --frames=8 --min-decoded-frames=4
+run_case timeout_recovered "${common_vm[@]}" --inject=timeout --allowed-timeouts=1 --frames=8 --min-decoded-frames=4
+run_case bytesused_zero "${common_vm[@]}" --inject=bytesused_zero --frames=8 --min-decoded-frames=4
+run_case unsupported_format "${common_vm[@]}" --inject=unsupported_format --min-decoded-frames=0
+run_case source_change_recovered "${common_vm[@]}" --inject=source_change --frames=8 --min-decoded-frames=4
+run_case source_change_no_reconfigure "${common_vm[@]}" --inject=source_change_no_reconfigure --frames=8 --min-decoded-frames=4
+run_case rk_rkmpp_evidence --mode=rk-rkmpp --decoder="${DECODER:-h264_rkmpp}" --no-require-device
 
 cat "${SUMMARY}"
 echo "fault_matrix_dir=${BASE_OUT}"

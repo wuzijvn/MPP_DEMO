@@ -1,0 +1,1 @@
+WARNING: erroneous pipeline: could not link videotestsrc0 to fakesink0, videotestsrc0 can't handle caps video/x-h264

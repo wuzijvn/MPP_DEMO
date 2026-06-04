@@ -1,0 +1,97 @@
+Stage06 Demo04: VM vim2m real QBUF/DQBUF/poll queue loop
+device                   : /dev/video0
+format                   : RGBP -> RGBP
+loops                    : 8
+S_FMT result:
+type                     : VIDEO_OUTPUT
+width                    : 640
+height                   : 480
+fourcc                   : RGBP
+bytesperline             : 1280
+sizeimage                : 614400
+S_FMT result:
+type                     : VIDEO_CAPTURE
+width                    : 640
+height                   : 480
+fourcc                   : RGBP
+bytesperline             : 1280
+sizeimage                : 614400
+REQBUFS VIDEO_OUTPUT     : requested=3, granted=3
+REQBUFS VIDEO_CAPTURE    : requested=4, granted=4
+MMAP VIDEO_OUTPUT        : index=0, length=614400
+MMAP VIDEO_OUTPUT        : index=1, length=614400
+MMAP VIDEO_OUTPUT        : index=2, length=614400
+MMAP VIDEO_CAPTURE       : index=0, length=614400
+MMAP VIDEO_CAPTURE       : index=1, length=614400
+MMAP VIDEO_CAPTURE       : index=2, length=614400
+MMAP VIDEO_CAPTURE       : index=3, length=614400
+QBUF VIDEO_CAPTURE       : index=0, bytesused=0
+QBUF VIDEO_CAPTURE       : index=1, bytesused=0
+QBUF VIDEO_CAPTURE       : index=2, bytesused=0
+QBUF VIDEO_CAPTURE       : index=3, bytesused=0
+QBUF VIDEO_OUTPUT        : index=0, bytesused=614400
+QBUF VIDEO_OUTPUT        : index=1, bytesused=614400
+QBUF VIDEO_OUTPUT        : index=2, bytesused=614400
+STREAMON                 : VIDEO_CAPTURE
+STREAMON                 : VIDEO_OUTPUT
+poll                     : ret=1, revents=0x5, timeout_ms=1000
+DQBUF VIDEO_CAPTURE      : index=0, bytesused=614400, sequence=0, flags=0x4001
+QBUF VIDEO_CAPTURE       : index=0, bytesused=0
+DQBUF VIDEO_OUTPUT       : index=0, bytesused=614400, sequence=0, flags=0x4001
+QBUF VIDEO_OUTPUT        : index=0, bytesused=614400
+poll                     : ret=1, revents=0x5, timeout_ms=1000
+DQBUF VIDEO_CAPTURE      : index=1, bytesused=614400, sequence=1, flags=0x4001
+QBUF VIDEO_CAPTURE       : index=1, bytesused=0
+DQBUF VIDEO_OUTPUT       : index=1, bytesused=614400, sequence=1, flags=0x4001
+QBUF VIDEO_OUTPUT        : index=1, bytesused=614400
+poll                     : ret=1, revents=0x5, timeout_ms=1000
+DQBUF VIDEO_CAPTURE      : index=2, bytesused=614400, sequence=2, flags=0x4001
+QBUF VIDEO_CAPTURE       : index=2, bytesused=0
+DQBUF VIDEO_OUTPUT       : index=2, bytesused=614400, sequence=2, flags=0x4001
+QBUF VIDEO_OUTPUT        : index=2, bytesused=614400
+poll                     : ret=1, revents=0x5, timeout_ms=1000
+DQBUF VIDEO_CAPTURE      : index=3, bytesused=614400, sequence=3, flags=0x4001
+QBUF VIDEO_CAPTURE       : index=3, bytesused=0
+DQBUF VIDEO_OUTPUT       : index=0, bytesused=614400, sequence=3, flags=0x4001
+QBUF VIDEO_OUTPUT        : index=0, bytesused=614400
+poll                     : ret=1, revents=0x5, timeout_ms=1000
+DQBUF VIDEO_CAPTURE      : index=0, bytesused=614400, sequence=4, flags=0x4001
+QBUF VIDEO_CAPTURE       : index=0, bytesused=0
+DQBUF VIDEO_OUTPUT       : index=1, bytesused=614400, sequence=4, flags=0x4001
+QBUF VIDEO_OUTPUT        : index=1, bytesused=614400
+poll                     : ret=1, revents=0x5, timeout_ms=1000
+DQBUF VIDEO_CAPTURE      : index=1, bytesused=614400, sequence=5, flags=0x4001
+QBUF VIDEO_CAPTURE       : index=1, bytesused=0
+DQBUF VIDEO_OUTPUT       : index=2, bytesused=614400, sequence=5, flags=0x4001
+QBUF VIDEO_OUTPUT        : index=2, bytesused=614400
+poll                     : ret=1, revents=0x5, timeout_ms=1000
+DQBUF VIDEO_CAPTURE      : index=2, bytesused=614400, sequence=6, flags=0x4001
+QBUF VIDEO_CAPTURE       : index=2, bytesused=0
+DQBUF VIDEO_OUTPUT       : index=0, bytesused=614400, sequence=6, flags=0x4001
+QBUF VIDEO_OUTPUT        : index=0, bytesused=614400
+poll                     : ret=1, revents=0x5, timeout_ms=1000
+DQBUF VIDEO_CAPTURE      : index=3, bytesused=614400, sequence=7, flags=0x4001
+QBUF VIDEO_CAPTURE       : index=3, bytesused=0
+DQBUF VIDEO_OUTPUT       : index=1, bytesused=614400, sequence=7, flags=0x4001
+QBUF VIDEO_OUTPUT        : index=1, bytesused=614400
+qbuf_output                      = 11
+qbuf_capture                     = 12
+dqbuf_output                     = 8
+dqbuf_capture                    = 8
+poll_calls                       = 8
+timeout_count                    = 0
+streamon_count                   = 2
+streamoff_count                  = 0
+mapped_output                    = 3
+mapped_capture                   = 4
+bytesused_zero_count             = 0
+STREAMOFF                : VIDEO_OUTPUT
+STREAMOFF                : VIDEO_CAPTURE
+munmap                   : index=0, length=614400
+munmap                   : index=1, length=614400
+munmap                   : index=2, length=614400
+munmap                   : index=3, length=614400
+munmap                   : index=0, length=614400
+munmap                   : index=1, length=614400
+munmap                   : index=2, length=614400
+verdict=PASS_VM_REAL_QUEUE_LOOP

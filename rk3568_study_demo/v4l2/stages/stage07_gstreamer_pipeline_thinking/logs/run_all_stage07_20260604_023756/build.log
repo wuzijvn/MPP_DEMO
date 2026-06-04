@@ -1,0 +1,7 @@
+[build] 01_gst_environment_probe.cpp -> 01_gst_environment_probe
+[build] 02_caps_negotiation_raw_video.cpp -> 02_caps_negotiation_raw_video
+[build] 03_queue_backpressure_latency.cpp -> 03_queue_backpressure_latency
+[build] 04_gst_debug_log_capture.cpp -> 04_gst_debug_log_capture
+[build] 05_link_failure_fault_injection.cpp -> 05_link_failure_fault_injection
+[build] 06_ffmpeg_gstreamer_compare.cpp -> 06_ffmpeg_gstreamer_compare
+[build] 07_hardware_backend_probe.cpp -> 07_hardware_backend_probe

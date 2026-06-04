@@ -17,6 +17,7 @@ namespace stage06_enterprise {
  * - gate_pass/verdict：用于自动化回归。
  */
 struct PipelineMetrics {
+    std::string mode = "vm-vim2m";
     int qbuf_output = 0;
     int qbuf_capture = 0;
     int dqbuf_output = 0;
@@ -29,12 +30,22 @@ struct PipelineMetrics {
     int eos_count = 0;
     int recovery_count = 0;
     int streamoff_count = 0;
+    int streamon_count = 0;
+    int mapped_output = 0;
+    int mapped_capture = 0;
     int max_output_depth = 0;
     int max_capture_depth = 0;
     bool device_opened = false;
     bool querycap_ok = false;
     bool m2m_capable = false;
+    bool streaming_capable = false;
+    bool real_ioctl_path = false;
     bool simulated_device = false;
+    bool unsupported_format_rejected = false;
+    bool ffmpeg_available = false;
+    bool rk_decoder_seen = false;
+    bool rk_decode_command_ok = false;
+    bool rk_evidence_collected = false;
     bool gate_pass = false;
     std::string verdict = "NOT_EVALUATED";
     std::string failure_layer = "none";

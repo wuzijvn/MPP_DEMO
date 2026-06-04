@@ -1,14 +1,12 @@
-[INFO][config] device=/dev/video0, output_dir=..., inject=none, output_fourcc=H264, capture_fourcc=NV12, size=1280x720, frames=12, output_depth=3, capture_depth=4, timeout_at=-1, source_change_at=-1, bytesused_zero_at=-1, recover=yes, require_device=no
-[INFO][state] INIT -> OPEN_DEVICE
-[INFO][device] opened /dev/video0
-[INFO][querycap] driver=rkisp_v5, card=rkisp_mainpath, m2m_capable=no
-[WARN][querycap] opened node is not a V4L2 M2M codec device; continue in simulated codec queue mode
-[INFO][format] OUTPUT=H264, CAPTURE=NV12, size=1280x720; real driver may adjust coded size, stride and sizeimage
-[INFO][buffer] OUTPUT buffers=3, CAPTURE buffers=4
-[INFO][stream] STREAMON OUTPUT + CAPTURE
-[INFO][loop] frame=1 qbuf_out_depth=1 qbuf_cap_depth=1
-...
-[INFO][gate] decoded_frames=12, qbuf_output=12, qbuf_capture=12, dqbuf_output=12, dqbuf_capture=14, poll_calls=14, timeout_count=0, bytesused_zero_count=0, m2m_capable=no, source_change_count=0, recovery_count=0, gate_pass=yes, verdict=PASS_NORMAL_PATH, failure_layer=none
-enterprise_log=.../enterprise_pipeline.log
-enterprise_metrics=.../enterprise_metrics.json
+[INFO][config] mode=vm-vim2m, device=/dev/video0
+[INFO][mode] VM vim2m: real V4L2 M2M ioctl path
+[INFO][querycap] driver=vim2m, card=vim2m
+[INFO][format] OUTPUT=RGBP, CAPTURE=RGBP
+QBUF VIDEO_CAPTURE
+QBUF VIDEO_OUTPUT
+STREAMON                 : VIDEO_CAPTURE
+STREAMON                 : VIDEO_OUTPUT
+DQBUF VIDEO_CAPTURE
+DQBUF VIDEO_OUTPUT
+[INFO][gate] mode=vm-vim2m, real_ioctl_path=yes
 enterprise_verdict=PASS_NORMAL_PATH

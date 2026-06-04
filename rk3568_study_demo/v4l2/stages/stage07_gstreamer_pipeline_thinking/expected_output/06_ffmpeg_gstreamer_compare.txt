@@ -1,0 +1,6 @@
+Stage07 Demo06: FFmpeg vs GStreamer mental model
+[gstreamer run]
+exit_code                    : 0
+[ffmpeg run]
+exit_code                    : 0
+verdict=PASS_FFMPEG_GSTREAMER_COMPARE

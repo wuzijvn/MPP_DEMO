@@ -1,0 +1,6 @@
+Stage07 Demo07: hardware backend candidate probe
+avdec_h264_rkmpp      installed=yes|no
+...
+[evidence checklist]
+found_hw_candidates=N
+verdict=PASS_BACKEND_PROBE

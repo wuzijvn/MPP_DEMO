@@ -28,4 +28,4 @@ list:
 
 clean:
 	rm -rf $(BIN_DIR)
-	$(MAKE) -C enterprise_project clean || true
+	./enterprise_project/build.sh clean || true

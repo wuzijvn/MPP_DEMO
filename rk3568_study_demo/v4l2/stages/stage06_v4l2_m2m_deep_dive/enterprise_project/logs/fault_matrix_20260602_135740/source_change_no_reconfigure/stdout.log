@@ -1,0 +1,62 @@
+[INFO][config] mode=vm-vim2m, device=/dev/video0, output_dir=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive/enterprise_project/logs/fault_matrix_20260602_135740/source_change_no_reconfigure, inject=source_change_no_reconfigure, input=(none), decoder=h264_rkmpp, output_fourcc=RGBP, capture_fourcc=RGBP, size=640x480, frames=8, output_depth=3, capture_depth=4, timeout_at=-1, source_change_at=3, bytesused_zero_at=-1, timeout_ms=1000, recover=no, require_device=yes, require_rkmpp=no
+[INFO][mode] VM vim2m: real V4L2 M2M ioctl path
+[INFO][device] opened /dev/video0
+[INFO][querycap] driver=vim2m, card=vim2m, active_caps=0x4208000, m2m_capable=yes, streaming_capable=yes
+[INFO][format] OUTPUT=RGBP, CAPTURE=RGBP, size=640x480
+S_FMT result:
+type                     : VIDEO_OUTPUT
+width                    : 640
+height                   : 480
+fourcc                   : RGBP
+bytesperline             : 1280
+sizeimage                : 614400
+S_FMT result:
+type                     : VIDEO_CAPTURE
+width                    : 640
+height                   : 480
+fourcc                   : RGBP
+bytesperline             : 1280
+sizeimage                : 614400
+REQBUFS VIDEO_OUTPUT     : requested=3, granted=3
+REQBUFS VIDEO_CAPTURE    : requested=4, granted=4
+MMAP VIDEO_OUTPUT        : index=0, length=614400
+MMAP VIDEO_OUTPUT        : index=1, length=614400
+MMAP VIDEO_OUTPUT        : index=2, length=614400
+MMAP VIDEO_CAPTURE       : index=0, length=614400
+MMAP VIDEO_CAPTURE       : index=1, length=614400
+MMAP VIDEO_CAPTURE       : index=2, length=614400
+MMAP VIDEO_CAPTURE       : index=3, length=614400
+QBUF VIDEO_CAPTURE       : index=0, bytesused=0
+QBUF VIDEO_CAPTURE       : index=1, bytesused=0
+QBUF VIDEO_CAPTURE       : index=2, bytesused=0
+QBUF VIDEO_CAPTURE       : index=3, bytesused=0
+QBUF VIDEO_OUTPUT        : index=0, bytesused=614400
+QBUF VIDEO_OUTPUT        : index=1, bytesused=614400
+QBUF VIDEO_OUTPUT        : index=2, bytesused=614400
+STREAMON                 : VIDEO_CAPTURE
+STREAMON                 : VIDEO_OUTPUT
+poll                     : ret=1, revents=0x5, timeout_ms=1000
+DQBUF VIDEO_CAPTURE      : index=0, bytesused=614400, sequence=0, flags=0x4001
+QBUF VIDEO_CAPTURE       : index=0, bytesused=0
+DQBUF VIDEO_OUTPUT       : index=0, bytesused=614400, sequence=0, flags=0x4001
+QBUF VIDEO_OUTPUT        : index=0, bytesused=614400
+poll                     : ret=1, revents=0x5, timeout_ms=1000
+DQBUF VIDEO_CAPTURE      : index=1, bytesused=614400, sequence=1, flags=0x4001
+QBUF VIDEO_CAPTURE       : index=1, bytesused=0
+DQBUF VIDEO_OUTPUT       : index=1, bytesused=614400, sequence=1, flags=0x4001
+QBUF VIDEO_OUTPUT        : index=1, bytesused=614400
+[WARN][source_change] vim2m has no codec SOURCE_CHANGE event; this path still runs real CAPTURE STREAMOFF/REQBUFS/S_FMT/STREAMON
+[ERROR][source_change] recovery disabled; stop after source-change fault
+STREAMOFF                : VIDEO_OUTPUT
+STREAMOFF                : VIDEO_CAPTURE
+munmap                   : index=0, length=614400
+munmap                   : index=1, length=614400
+munmap                   : index=2, length=614400
+munmap                   : index=3, length=614400
+munmap                   : index=0, length=614400
+munmap                   : index=1, length=614400
+munmap                   : index=2, length=614400
+[INFO][gate] mode=vm-vim2m, real_ioctl_path=yes, decoded_frames=2, qbuf_output=5, qbuf_capture=6, dqbuf_output=2, dqbuf_capture=2, mapped_output=3, mapped_capture=4, poll_calls=2, timeout_count=1, bytesused_zero_count=0, unsupported_format_rejected=no, m2m_capable=yes, streaming_capable=yes, rk_decoder_seen=no, rk_decode_command_ok=no, source_change_count=1, recovery_count=0, gate_pass=no, verdict=FAIL_TIMEOUT_OVER_LIMIT, failure_layer=driver_or_hardware_completion
+enterprise_log=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive/enterprise_project/logs/fault_matrix_20260602_135740/source_change_no_reconfigure/enterprise_pipeline.log
+enterprise_metrics=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive/enterprise_project/logs/fault_matrix_20260602_135740/source_change_no_reconfigure/enterprise_metrics.json
+enterprise_verdict=FAIL_TIMEOUT_OVER_LIMIT

@@ -1,0 +1,1 @@
+PASS hardware_probe_rkmpp

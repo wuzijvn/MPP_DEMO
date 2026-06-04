@@ -1,0 +1,9 @@
+[INFO] logger | open /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage07_gstreamer_pipeline_thinking/enterprise_project/logs/fault_matrix_20260604_024019/slow_queue_observation/enterprise_pipeline.log
+[INFO] config | mode=raw-basic, scenario=slow-queue, output_dir=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage07_gstreamer_pipeline_thinking/enterprise_project/logs/fault_matrix_20260604_024019/slow_queue_observation, backend_element=avdec_h264_rkmpp, frames=20, size=320x240, queue_depth=3, slow_us=3000, require_backend=no, expect_failure=no, max_elapsed_ms=20000
+[INFO] probe | gst-launch=yes, gst-inspect=yes
+[INFO] probe | backend_element=avdec_h264_rkmpp, installed=yes
+[INFO] pipeline | videotestsrc num-buffers=20 ! video/x-raw,format=NV12,width=320,height=240,framerate=30/1 ! queue max-size-buffers=3 max-size-bytes=0 max-size-time=0 ! identity sleep-time=3000 ! videoconvert ! video/x-raw,format=I420 ! fakesink sync=false
+[INFO] pipeline | gst log saved to /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage07_gstreamer_pipeline_thinking/enterprise_project/logs/fault_matrix_20260604_024019/slow_queue_observation/gst_run.log
+[INFO] metrics | exit_code=0, elapsed_ms=222, eos_count=1, failure_layer=success
+[INFO] gate | PASS: normal pipeline reached EOS within gate thresholds
+[INFO] driver_shadow | GStreamer evidence must be mapped to plugin/rootfs, caps negotiation, codec backend, and device/driver logs.

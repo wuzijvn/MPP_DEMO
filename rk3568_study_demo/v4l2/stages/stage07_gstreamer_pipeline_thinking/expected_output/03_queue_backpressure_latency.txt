@@ -1,0 +1,8 @@
+Stage07 Demo03: queue backpressure and latency observation
+frames                       : 40
+slow_node_sleep_us           : 2000
+[without queue]
+exit_code                    : 0
+[with queue]
+exit_code                    : 0
+verdict=PASS_QUEUE_OBSERVATION

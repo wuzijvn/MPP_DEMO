@@ -1,0 +1,4 @@
+Stage07 Demo04: GST_DEBUG log capture
+output_dir                   : logs/debug_demo
+log_path                     : .../gst_debug_caps.log
+verdict=PASS_GST_DEBUG_CAPTURE

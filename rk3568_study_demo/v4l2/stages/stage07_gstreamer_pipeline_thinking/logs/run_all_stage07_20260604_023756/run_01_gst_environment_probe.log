@@ -1,0 +1,35 @@
+Stage07 Demo01: GStreamer environment and backend probe
+gst-launch-1.0                 : yes
+gst-inspect-1.0                : yes
+
+[version]
+gst-launch-1.0 version 1.16.2
+GStreamer 1.16.2
+https://launchpad.net/distros/ubuntu/+source/gstreamer1.0
+
+[base element matrix]
+videotestsrc                   : yes
+capsfilter                     : yes
+queue                          : yes
+identity                       : yes
+videoconvert                   : yes
+fakesink                       : yes
+filesrc                        : yes
+decodebin                      : yes
+fpsdisplaysink                 : yes
+
+[hardware/backend candidate matrix]
+avdec_h264_rkmpp         : installed=yes | hint=Rockchip MPP/VPU path candidate; verify with dmesg, CPU, logs, and output format.
+avdec_hevc_rkmpp         : installed=yes | hint=Rockchip MPP/VPU path candidate; verify with dmesg, CPU, logs, and output format.
+avdec_vp9_rkmpp          : installed=yes | hint=Rockchip MPP/VPU path candidate; verify with dmesg, CPU, logs, and output format.
+mpph264enc               : installed=yes | hint=Rockchip MPP/VPU path candidate; verify with dmesg, CPU, logs, and output format.
+v4l2h264dec              : installed=no | hint=V4L2 path candidate; map caps to VIDIOC_ENUM_FMT/TRY_FMT/S_FMT and device node.
+v4l2slh264dec            : installed=no | hint=V4L2 path candidate; map caps to VIDIOC_ENUM_FMT/TRY_FMT/S_FMT and device node.
+vaapih264dec             : installed=no | hint=VAAPI path candidate; map to libva, DRM render node, Mesa/driver support.
+omxh264dec               : installed=no | hint=OpenMAX path candidate; map to vendor OMX component and buffer mode.
+
+[driver shadow]
+element_installed=yes only proves user-space plugin visibility.
+hardware_proof requires a successful pipeline plus backend logs, device node or dmesg evidence.
+found_hw_candidates=4
+verdict=PASS_GSTREAMER_ENVIRONMENT_PROBE

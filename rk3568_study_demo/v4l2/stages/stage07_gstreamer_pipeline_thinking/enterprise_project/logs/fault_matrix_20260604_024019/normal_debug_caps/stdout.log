@@ -1,0 +1,15 @@
+Stage07 Enterprise GStreamer Pipeline Diagnostic Service
+config                           : mode=debug-caps, scenario=normal, output_dir=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage07_gstreamer_pipeline_thinking/enterprise_project/logs/fault_matrix_20260604_024019/normal_debug_caps, backend_element=avdec_h264_rkmpp, frames=16, size=320x240, queue_depth=4, slow_us=0, require_backend=no, expect_failure=no, max_elapsed_ms=20000
+pipeline                         : videotestsrc num-buffers=16 ! video/x-raw,format=NV12,width=320,height=240,framerate=30/1 ! videoconvert ! video/x-raw,format=I420 ! fakesink sync=false
+gst_tools_available              : yes
+backend_installed                : yes
+exit_code                        : 0
+elapsed_ms                       : 154
+eos_count                        : 1
+caps_mentions                    : 0
+failure_layer                    : success
+gate_pass                        : yes
+gate_reason                      : normal pipeline reached EOS within gate thresholds
+metrics_json                     : /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage07_gstreamer_pipeline_thinking/enterprise_project/logs/fault_matrix_20260604_024019/normal_debug_caps/enterprise_metrics.json
+gst_log                          : /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage07_gstreamer_pipeline_thinking/enterprise_project/logs/fault_matrix_20260604_024019/normal_debug_caps/gst_run.log
+verdict=PASS_ENTERPRISE_GST_PIPELINE

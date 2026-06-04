@@ -1,46 +1,49 @@
-# 驱动影子线：这一阶段对应的驱动侧知识
+# Driver Shadow Note
 
-## 用户态行为映射到哪个内核子系统
+## VM/vim2m 映射
 
-1. `/dev/videoX`：V4L2 character device，由具体 media/platform/camera/codec 驱动注册。
-2. `VIDIOC_QUERYCAP`：V4L2 ioctl，返回 driver/card/capability。
-3. `VIDIOC_S_FMT`：格式协商，进入驱动 format ops。
-4. `REQBUFS/QUERYBUF/MMAP`：videobuf2 buffer 分配、查询、映射。
-5. `QBUF/DQBUF`：vb2 buffer 所有权转移和完成回收。
-6. `poll`：等待驱动 waitqueue，被 IRQ 或 worker completion 唤醒。
-7. `SOURCE_CHANGE`：stateful decoder 在分辨率/格式变化时向用户态发事件。
-8. `STREAMOFF`：停止队列和硬件 job，必须处理 active buffer cleanup。
+| 用户态动作 | 内核/驱动侧影子 |
+| --- | --- |
+| `open("/dev/video0")` | V4L2 character device open，创建 file/session context |
+| `VIDIOC_QUERYCAP` | 驱动返回 `driver/card/device_caps` |
+| `VIDIOC_ENUM_FMT` | 驱动暴露 OUTPUT/CAPTURE 支持格式 |
+| `VIDIOC_S_FMT` | format ops，驱动可调整 fourcc、stride、sizeimage |
+| `VIDIOC_REQBUFS` | videobuf2 queue 创建 buffer 槽位 |
+| `VIDIOC_QUERYBUF` + `mmap` | 用户态映射 vb2 buffer |
+| `VIDIOC_QBUF` | buffer 所有权 USER -> DRIVER |
+| `VIDIOC_STREAMON` | queue 进入 streaming，M2M scheduler 可调度 job |
+| `poll` | 等待 waitqueue，被 job completion/worker 唤醒 |
+| `VIDIOC_DQBUF` | buffer 所有权 DRIVER -> USER |
+| `VIDIOC_STREAMOFF` | 停止 queue，回收 active buffer |
+| `munmap` + `REQBUFS 0` | 释放用户映射和 vb2 buffer |
 
-## 哪些设备节点或 ioctl 涉及
+## RK/RKMPP 映射
 
-| 目标 | 节点 | ioctl/API | 说明 |
-| --- | --- | --- | --- |
-| codec M2M | `/dev/videoX` | V4L2 M2M ioctls | 必须确认 M2M capability |
-| camera/ISP | `/dev/videoX` | capture ioctls | 不是 codec decoder |
-| media graph | `/dev/mediaX` | media controller | 帮助理解拓扑 |
-| display/GPU | `/dev/dri/*` | DRM/KMS/PRIME | 后续 DMA-BUF/zero-copy 阶段 |
+RK 板如果没有 V4L2 codec M2M 节点，硬解证据应来自：
 
-## 当前需要掌握
+```text
+FFmpeg h264_rkmpp/hevc_rkmpp
+  -> Rockchip MPP userspace/library
+  -> kernel VPU/media driver
+  -> VPU hardware
+```
 
-1. 不要把“能 open `/dev/video0`”等同于“找到 VPU codec”。
-2. decoder OUTPUT 是 compressed bitstream，CAPTURE 是 decoded raw frame。
-3. `bytesused` 是 OUTPUT payload 的生命线，错误会造成假 timeout。
-4. `SOURCE_CHANGE` 后 CAPTURE queue 生命周期必须重新走。
-5. timeout 需要分层，不要第一句话就定性 driver bug。
+这条路径不等同于 VM `vim2m`，也不要求对 `/dev/video0` 跑 codec M2M ioctl。
 
-## 可以暂时推迟
+## 关键判断
 
-1. 具体 VPU register 编程。
-2. 厂商 firmware command 格式。
-3. 完整 production VPU reset recovery。
-4. DMA-BUF exporter/importer 内核实现细节。
+1. `m2m_capable=yes` 只说明这个节点是 M2M，不说明它是 H.264/H.265 decoder。
+2. `vim2m` 完成 `DQBUF` 说明 M2M queue 逻辑正确，不说明硬解成功。
+3. `S_FMT(H264)` 在 raw M2M 设备上可能失败，也可能回填成 RGBP；要看 ioctl 返回和回填值。
+4. `bytesused=0` 如果被 driver 接受，也仍然是用户态 payload 风险，需要继续看 poll/DQBUF 进展。
+5. source change 的训练重点是 CAPTURE queue 重配顺序：`STREAMOFF -> REQBUFS 0 -> S_FMT -> REQBUFS -> QBUF -> STREAMON`。
 
-## 驱动侧故障假设模板
+## Timeout 分层
 
-| 用户态现象 | 可能驱动侧原因 | 需要证据 |
-| --- | --- | --- |
-| `DQBUF` timeout | IRQ 未到、job 未完成、firmware hang | dmesg、trace、queue counter |
-| 第二次运行失败 | runtime PM/clock/reset 清理不完整 | PM 日志、重复 open/close 测试 |
-| source change 后卡死 | CAPTURE queue 重配路径或事件处理问题 | DQEVENT、STREAMOFF/REQBUFS 日志 |
-| 显示失败 | CAPTURE format/modifier 不被 DRM plane 支持 | DRM plane format、DMA-BUF 导入日志 |
-| CPU 高 | hidden copy、hwdownload、格式转换 | copy-count、perf、FFmpeg/GStreamer log |
+| 现象 | 第一层排查 |
+| --- | --- |
+| poll timeout | OUTPUT/CAPTURE 是否都已 QBUF |
+| OUTPUT DQBUF 不增长 | payload/bytesused/format 是否合理 |
+| CAPTURE DQBUF 不增长 | CAPTURE buffer 数量、sizeimage、driver completion |
+| 第二次运行失败 | STREAMOFF、munmap、REQBUFS 0、runtime PM cleanup |
+| RKMPP 命令失败 | FFmpeg decoder 是否存在、MPP 库、dmesg VPU/firmware 日志 |

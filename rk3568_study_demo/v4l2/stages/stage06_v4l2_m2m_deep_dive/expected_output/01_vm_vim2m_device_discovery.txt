@@ -1,0 +1,8 @@
+Stage06 Demo01: VM vim2m device discovery with real ioctl
+device                   : /dev/video0
+driver                   : vim2m
+m2m_capable              : yes
+streaming_capable        : yes
+OUTPUT formats from real VIDIOC_ENUM_FMT:
+CAPTURE formats from real VIDIOC_ENUM_FMT:
+verdict=PASS_VM_M2M_DEVICE_DISCOVERY

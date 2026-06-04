@@ -1,0 +1,25 @@
+crw-rw----+ 1 root video  226,   0 May 27 01:38 /dev/dri/card0
+crw-rw----+ 1 root video  226,   1 May 27 01:38 /dev/dri/card1
+crw-rw----+ 1 root render 226, 128 May 27 01:38 /dev/dri/renderD128
+crw-rw----+ 1 root render 226, 129 May 27 01:38 /dev/dri/renderD129
+crw-rw----+ 1 root video   81,   0 May 27 01:38 /dev/video0
+crw-rw----+ 1 root video   81,   1 May 27 01:38 /dev/video1
+crw-rw----+ 1 root video   81,  10 May 27 01:38 /dev/video10
+crw-rw----+ 1 root video   81,  11 May 27 01:38 /dev/video11
+crw-rw----+ 1 root video   81,   2 May 27 01:38 /dev/video2
+crw-rw----+ 1 root video   81,   3 May 27 01:38 /dev/video3
+crw-rw----+ 1 root video   81,   4 May 27 01:38 /dev/video4
+crw-rw----+ 1 root video   81,   5 May 27 01:38 /dev/video5
+crw-rw----+ 1 root video   81,   6 May 27 01:38 /dev/video6
+crw-rw----+ 1 root video   81,   7 May 27 01:38 /dev/video7
+crw-rw----+ 1 root video   81,   8 May 27 01:38 /dev/video8
+crw-rw----+ 1 root video   81,   9 May 27 01:38 /dev/video9
+-rw-rw----  1 root video         4 May 27 01:38 /dev/video-dec0
+-rw-rw----  1 root video         4 May 27 01:38 /dev/video-enc0
+
+/dev/dri/by-path:
+total 0
+lrwxrwxrwx 1 root root  8 May 27 01:38 platform-display-subsystem-card -> ../card0
+lrwxrwxrwx 1 root root 13 May 27 01:38 platform-display-subsystem-render -> ../renderD128
+lrwxrwxrwx 1 root root  8 May 27 01:38 platform-fde40000.npu-card -> ../card1
+lrwxrwxrwx 1 root root 13 May 27 01:38 platform-fde40000.npu-render -> ../renderD129

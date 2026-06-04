@@ -1,0 +1,4 @@
+Stage07 Demo05: intentional link failure and layer classification
+exit_code                    : 1
+classified_layer             : link_or_caps_negotiation_failure
+verdict=PASS_EXPECTED_LINK_FAILURE

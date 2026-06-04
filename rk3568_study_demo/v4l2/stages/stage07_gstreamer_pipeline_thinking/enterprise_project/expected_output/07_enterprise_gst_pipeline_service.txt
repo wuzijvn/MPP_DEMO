@@ -1,0 +1,9 @@
+Stage07 Enterprise GStreamer Pipeline Diagnostic Service
+config                         : mode=debug-caps, scenario=normal, ...
+gst_tools_available            : yes
+backend_installed              : yes|no
+exit_code                      : 0
+eos_count                      : 1
+failure_layer                  : success
+gate_pass                      : yes
+verdict=PASS_ENTERPRISE_GST_PIPELINE

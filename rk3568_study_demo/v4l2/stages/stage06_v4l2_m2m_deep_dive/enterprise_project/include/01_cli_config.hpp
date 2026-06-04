@@ -17,22 +17,27 @@ namespace stage06_enterprise {
  * - 真实 bring-up 工具必须把测试输入写进日志/JSON，否则复现问题时会丢关键信息。
  */
 struct CliConfig {
+    std::string mode = "vm-vim2m";
     std::string device = "/dev/video0";
     std::string output_dir = "logs/enterprise_default";
     std::string inject = "none";
-    uint32_t output_fourcc = V4L2_PIX_FMT_H264;
-    uint32_t capture_fourcc = V4L2_PIX_FMT_NV12;
-    uint32_t width = 1280;
-    uint32_t height = 720;
-    int frames = 12;
+    std::string input;
+    std::string decoder = "h264_rkmpp";
+    uint32_t output_fourcc = v4l2_fourcc('R', 'G', 'B', 'P');
+    uint32_t capture_fourcc = v4l2_fourcc('R', 'G', 'B', 'P');
+    uint32_t width = 640;
+    uint32_t height = 480;
+    int frames = 8;
     int output_depth = 3;
     int capture_depth = 4;
     int timeout_at = -1;
     int source_change_at = -1;
     int bytesused_zero_at = -1;
-    int min_decoded_frames = 6;
+    int min_decoded_frames = 4;
     int allowed_timeouts = 0;
-    bool require_device = false;
+    int timeout_ms = 1000;
+    bool require_device = true;
+    bool require_rkmpp = false;
     bool recover = true;
     bool verbose = true;
 };

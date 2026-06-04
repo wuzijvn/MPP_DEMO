@@ -1,0 +1,10 @@
+Stage07 Demo01: GStreamer environment and backend probe
+gst-launch-1.0               : yes
+gst-inspect-1.0              : yes
+[base element matrix]
+videotestsrc                 : yes
+...
+[hardware/backend candidate matrix]
+avdec_h264_rkmpp             : installed=yes|no
+...
+verdict=PASS_GSTREAMER_ENVIRONMENT_PROBE

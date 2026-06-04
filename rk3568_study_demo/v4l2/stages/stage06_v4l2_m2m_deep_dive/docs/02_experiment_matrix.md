@@ -1,26 +1,50 @@
 # Stage06 Experiment Matrix
 
-| 实验 | 知识点 | 真实场景 | 命令 | 预期输出 | 通过标准 | 指标 | 假信号 | 失败层 | 下一步 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 基础全跑 | Stage06 全链路 | 学习包自检 | `./scripts/run_all_stage06.sh` | 6 个 PASS | exit 0 | 每个 demo log | 模拟通过不等于真实硬解 | 测试覆盖层 | 看 logs 目录 |
-| ioctl 顺序 | stateful decoder | 解释 OUTPUT/CAPTURE | `./scripts/run_01_decoder_ioctl_sequence_map.sh` | `SEQUENCE_MAP_READY` | 有 source_change/eos counter | qbuf/dqbuf count | 只模拟不访问设备 | 概念层 | 进入 demo02 |
-| 格式协商 | TRY_FMT/S_FMT | 格式不支持 | `SIMULATE=1 ./scripts/run_02_format_negotiation_probe.sh` | simulated report | fourcc/size 清楚 | output/capture fourcc | 模拟不证明驱动支持 | 格式层 | 换真实 M2M 节点 |
-| buffer 生命周期 | REQBUFS/MMAP | buffer 泄漏/悬挂 | `./scripts/run_03_mmap_buffer_lifecycle_sim.sh` | owner 状态变化 | 释放顺序正确 | buffer count | 模拟地址不是真实 mmap | buffer 层 | 接真实 QUERYBUF |
-| timeout 恢复 | poll/DQBUF | 长跑卡住 | `./scripts/run_04_qbuf_dqbuf_poll_timeout_sim.sh` | `TIMEOUT_DETECTED_AND_RECOVERED` | recovery_count=1 | timeout_count | 恢复策略简化 | 驱动/硬件完成层 | 查 dmesg/trace |
-| source change | CAPTURE 重配 | 分辨率变化 | `./scripts/run_05_source_change_eos_drain_sim.sh` | `SOURCE_CHANGE_EOS_DRAIN_HANDLED` | source_change=1 | recovery/eos | 没有真实 event fd | 状态机层 | 加 `VIDIOC_DQEVENT` |
-| debug report | 报告能力 | 给驱动同学提 issue | `./scripts/run_06_timeout_debug_report_template.sh` | markdown report | report 文件存在 | timeout/source flags | 模板不等于根因 | 文档层 | 填真实命令日志 |
-| 企业正常 | gate | bring-up 快速验证 | `./enterprise_project/scripts/run_07_enterprise_m2m_diagnostic_service.sh` | `PASS_NORMAL_PATH` | gate_pass=yes | decoded/qbuf/dqbuf | 默认可模拟 | 服务层 | 加 require-device |
-| 企业故障矩阵 | fault injection | 回归测试 | `./enterprise_project/scripts/run_07_enterprise_fault_matrix.sh` | summary.tsv | 正常/恢复 pass，故障 fail | verdict/failure_layer | fail 是预期 | gate 层 | 看每个 metrics JSON |
-| M2M capability gate | 节点分类 | video 节点混淆 | `./enterprise_project/bin/07_enterprise_m2m_diagnostic_service --require-device --output-dir=enterprise_project/logs/run_require_m2m_gate` | `FAIL_M2M_CAPABILITY_REQUIRED` | 当前 ISP 节点应 fail | m2m_capable | 有 video 节点不等于 codec | device_capability | 找 M2M 节点 |
+| 实验 | 命令 | 预期 verdict | 证明点 |
+| --- | --- | --- | --- |
+| VM 全跑 | `./scripts/run_all_stage06.sh` | 6 个 PASS | 基础 demo + 企业 VM 服务都能跑 |
+| 设备发现 | `./scripts/run_01_vm_vim2m_device_discovery.sh` | `PASS_VM_M2M_DEVICE_DISCOVERY` | `QUERYCAP/ENUM_FMT` 真实执行 |
+| 格式协商 | `./scripts/run_02_vm_vim2m_format_negotiation.sh` | `PASS_VM_FORMAT_NEGOTIATION` | `TRY_FMT/S_FMT` 和驱动回填 |
+| mmap 生命周期 | `./scripts/run_03_vm_vim2m_mmap_lifecycle.sh` | `PASS_VM_MMAP_LIFECYCLE` | `REQBUFS/QUERYBUF/MMAP/munmap` |
+| queue loop | `./scripts/run_04_vm_vim2m_queue_loop.sh` | `PASS_VM_REAL_QUEUE_LOOP` | `QBUF/poll/DQBUF/requeue` |
+| VM 故障 | `./scripts/run_05_vm_vim2m_fault_injection.sh` | `PASS_FAULT_*` | 故障真实打到 driver |
+| RK 证据 | `./scripts/run_06_rk_board_rkmpp_hardware_path.sh` | `PASS_RK_HARDWARE_PATH_EVIDENCE_COLLECTED` | RKMPP/FFmpeg/板端证据 |
+| 企业 VM | `./enterprise_project/scripts/run_07_enterprise_m2m_diagnostic_service.sh` | `PASS_NORMAL_PATH` | metrics/gate 证明真实 ioctl path |
+| 企业矩阵 | `./enterprise_project/scripts/run_07_enterprise_fault_matrix.sh` | summary.tsv | 正常、恢复、故障、RK 证据分流 |
+| 上线后调试跟练 | 手动阅读并执行 `docs/06_post_code_debugging_guide.md` 中的命令 | 能写出 debug report | CPU、耗时、内存、fd/mmap、queue、fallback、RK driver evidence |
+
+## 企业矩阵预期
+
+```text
+normal                       0  PASS_NORMAL_PATH
+timeout_recovered            0  PASS_WITH_RECOVERY_EVIDENCE
+bytesused_zero               1  FAIL_OUTPUT_BYTESUSED_ZERO
+unsupported_format           0  PASS_FAULT_UNSUPPORTED_FORMAT_REJECTED
+source_change_recovered      0  PASS_WITH_RECOVERY_EVIDENCE
+source_change_no_reconfigure 1  FAIL_TIMEOUT_OVER_LIMIT
+rk_rkmpp_evidence            0  PASS_RK_HARDWARE_PATH_EVIDENCE
+```
 
 ## 指标解释
 
-| 指标 | 期望趋势 | 偏差含义 | 可能层级 | 下一步验证 |
-| --- | --- | --- | --- | --- |
-| `qbuf_output` | 随帧数增长 | 没增长说明没有投喂码流 | 用户态/队列 | 打印 buffer index/bytesused |
-| `qbuf_capture` | 至少保持足够空帧 buffer | 太少会背压硬件输出 | buffer/性能 | 调整 CAPTURE buffer count |
-| `dqbuf_capture` | 随 decoded frame 增长 | 不增长说明没完成输出 | bitstream/driver/hardware | dmesg/trace/poll |
-| `timeout_count` | 正常为 0 | job 未完成或状态机错误 | 驱动/硬件/PM | IRQ、firmware、runtime PM |
-| `source_change_count` | 只在分辨率变化出现 | 未处理会卡住 | 状态机/driver event | DQEVENT + CAPTURE 重配 |
-| `m2m_capable` | codec 节点为 yes | no 说明不是 codec M2M | 设备节点 | v4l2-ctl list-devices |
-| `failure_layer` | fail 时必须具体 | `none` 但失败说明 gate 漏洞 | gate 逻辑 | 修正 evaluator |
+| 指标 | 期望 | 含义 |
+| --- | --- | --- |
+| `real_ioctl_path` | VM 模式必须 `true` | 不允许用模拟代替 V4L2 M2M 验证 |
+| `mapped_output/mapped_capture` | 大于 0 | mmap 生命周期被覆盖 |
+| `qbuf_output/qbuf_capture` | 大于 0 | buffer 交给 driver |
+| `dqbuf_output/dqbuf_capture` | 大于 0 | driver 把 buffer 交回 user |
+| `decoded_frames` | 达到 gate | 对 vim2m 表示完成帧数，不表示 codec 硬解帧 |
+| `failure_layer` | fail 时具体 | 能定位到 device、format、queue、gate、RK backend |
+
+## 手动调试指标
+
+代码跑通后，还要能手动收集这些信号：
+
+| 指标 | 推荐入口 | 证明点 |
+| --- | --- | --- |
+| CPU/thread 热点 | `top -H`、`pidstat`、`perf` | 是否忙等、copy 热点或 syscall 过密 |
+| 耗时/latency | `/usr/bin/time -v`、`strace -T` | 是否卡在 `poll/ioctl/DQBUF` |
+| 内存增长 | `ps`、`pmap`、`smaps_rollup`、Valgrind/ASan | 是否有 heap 或 mmap 泄漏 |
+| fd 生命周期 | `/proc/<pid>/fd`、`lsof`、`strace openat/close` | `open/close` 是否对称 |
+| mmap 生命周期 | `strace mmap/munmap` | `mmap/munmap` 是否对称 |
+| RK 硬件证据 | FFmpeg decoder、dmesg、thermal/sysfs | 是否真的进入 RK 硬件路径 |

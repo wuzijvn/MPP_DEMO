@@ -1,0 +1,23 @@
+Stage06 Demo05: VM vim2m real fault injection
+device                   : /dev/video0
+inject                   : bytesused_zero
+S_FMT result:
+type                     : VIDEO_OUTPUT
+width                    : 640
+height                   : 480
+fourcc                   : RGBP
+bytesperline             : 1280
+sizeimage                : 614400
+S_FMT result:
+type                     : VIDEO_CAPTURE
+width                    : 640
+height                   : 480
+fourcc                   : RGBP
+bytesperline             : 1280
+sizeimage                : 614400
+REQBUFS VIDEO_OUTPUT     : requested=1, granted=1
+MMAP VIDEO_OUTPUT        : index=0, length=614400
+QBUF VIDEO_OUTPUT        : index=0, bytesused=0
+fault_result             : driver accepted bytesused=0; next diagnostic should check progress/poll
+munmap                   : index=0, length=614400
+verdict=PASS_FAULT_BYTESUSED_ZERO_REACHED_DRIVER

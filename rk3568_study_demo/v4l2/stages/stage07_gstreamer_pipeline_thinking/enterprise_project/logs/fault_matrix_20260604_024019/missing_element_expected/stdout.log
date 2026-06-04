@@ -1,0 +1,15 @@
+Stage07 Enterprise GStreamer Pipeline Diagnostic Service
+config                           : mode=raw-basic, scenario=missing-element, output_dir=/usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage07_gstreamer_pipeline_thinking/enterprise_project/logs/fault_matrix_20260604_024019/missing_element_expected, backend_element=avdec_h264_rkmpp, frames=8, size=320x240, queue_depth=4, slow_us=0, require_backend=no, expect_failure=yes, max_elapsed_ms=20000
+pipeline                         : videotestsrc num-buffers=8 ! definitely_missing_stage07_element ! fakesink sync=false
+gst_tools_available              : yes
+backend_installed                : yes
+exit_code                        : 1
+elapsed_ms                       : 88
+eos_count                        : 0
+caps_mentions                    : 0
+failure_layer                    : missing_element_or_plugin
+gate_pass                        : yes
+gate_reason                      : expected failure reproduced and classified
+metrics_json                     : /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage07_gstreamer_pipeline_thinking/enterprise_project/logs/fault_matrix_20260604_024019/missing_element_expected/enterprise_metrics.json
+gst_log                          : /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage07_gstreamer_pipeline_thinking/enterprise_project/logs/fault_matrix_20260604_024019/missing_element_expected/gst_run.log
+verdict=PASS_ENTERPRISE_GST_PIPELINE

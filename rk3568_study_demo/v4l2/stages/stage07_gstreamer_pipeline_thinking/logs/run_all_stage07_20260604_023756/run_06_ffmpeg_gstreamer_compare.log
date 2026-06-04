@@ -1,0 +1,24 @@
+Stage07 Demo06: FFmpeg vs GStreamer mental model
+[mapping]
+FFmpeg input/filter/output model  <->  GStreamer element/pad/caps model
+FFmpeg decoder selection          <->  GStreamer decoder element selection
+FFmpeg hwaccel/hwdownload         <->  GStreamer hardware element + memory caps + sink
+
+[gstreamer run]
+command                        : gst-launch-1.0 -q videotestsrc num-buffers=12 ! video/x-raw,format=NV12,width=320,height=240,framerate=30/1 ! videoconvert ! fakesink sync=false
+exit_code                      : 0
+elapsed_ms                     : 133
+output_begin
+output_end
+
+[ffmpeg run]
+command                        : ffmpeg -hide_banner -loglevel error -f lavfi -i testsrc2=size=320x240:rate=30 -frames:v 12 -f null -
+exit_code                      : 0
+elapsed_ms                     : 155
+output_begin
+output_end
+
+[driver shadow]
+If FFmpeg hardware path works but GStreamer fails, compare backend plugin, parser, caps, and sink memory type.
+If both fail on the same compressed stream, suspect bitstream/profile/backend/driver/device support earlier.
+verdict=PASS_FFMPEG_GSTREAMER_COMPARE

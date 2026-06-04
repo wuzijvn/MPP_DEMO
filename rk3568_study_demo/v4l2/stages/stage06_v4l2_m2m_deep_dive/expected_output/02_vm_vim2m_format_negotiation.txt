@@ -1,0 +1,8 @@
+Stage06 Demo02: VM vim2m real format negotiation
+device                   : /dev/video0
+mode                     : TRY_FMT(safe probe)
+output_fourcc            : RGBP
+capture_fourcc           : RGBP
+TRY_FMT result:
+fourcc                   : RGBP
+verdict=PASS_VM_FORMAT_NEGOTIATION

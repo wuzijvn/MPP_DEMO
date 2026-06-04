@@ -8,8 +8,8 @@
 
 | 环境 | 主要作用 | 对应 stage | 证据边界 |
 | --- | --- | --- | --- |
-| VM / x86 Linux | 学 V4L2 M2M ioctl、双队列、状态机、timeout/source-change 逻辑 | Stage03、Stage06 | 证明用户态逻辑，不证明 RK VPU 硬解 |
-| RK 板 / RK3568 | 验证真实硬件编解码、性能、dmesg 和 backend 证据 | Stage05、Stage06 reality check | 证明 RKMPP 路径，不证明通用 V4L2 M2M 节点存在 |
+| VM / x86 Linux | 学 V4L2 M2M ioctl、双队列、状态机、GStreamer pipeline/caps/queue/debug 逻辑 | Stage03、Stage06、Stage07 | 证明用户态逻辑，不证明 RK VPU 硬解 |
+| RK 板 / RK3568 | 验证真实硬件编解码、性能、dmesg、FFmpeg/GStreamer backend 证据 | Stage05、Stage06 reality check、Stage07 backend probe | 证明 RKMPP/backend 候选或真实路径，不能只凭插件存在证明硬解 |
 
 详细路线：`../learning_plan/00_dual_environment_codec_route.md`
 
@@ -74,6 +74,18 @@
 - 构建：
   ```bash
   cd /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage06_v4l2_m2m_deep_dive
+  ./build.sh all-with-enterprise
+  ```
+
+7. `stage07_gstreamer_pipeline_thinking`
+- 目标：GStreamer pipeline thinking（element/pad/caps negotiation/queue/GST_DEBUG/failure layer/FFmpeg 对照/硬件后端候选）
+- 当前环境定位：VM/RK 均可运行基础 raw pipeline；RK 板可进一步探测 `avdec_h264_rkmpp`、`avdec_hevc_rkmpp`、`mpph264enc` 等后端候选。
+- 入口：`src/01_gst_environment_probe.cpp` ~ `src/07_hardware_backend_probe.cpp`
+- 企业级补充：`enterprise_project/`（CLI + 状态机 + 日志 + metrics JSON + gate + fault matrix）
+- 当前边界：默认使用 `videotestsrc` 学 pipeline/caps/queue/debug；插件存在不是硬解证明，真实硬解还需要真实码流、后端日志、dmesg/device node、CPU/fps/fallback 证据。
+- 构建：
+  ```bash
+  cd /usr/local/MPP_DEMO/rk3568_study_demo/v4l2/stages/stage07_gstreamer_pipeline_thinking
   ./build.sh all-with-enterprise
   ```
 

@@ -1,0 +1,5 @@
+Stage07 Demo02: raw caps negotiation
+input_caps                   : video/x-raw,format=NV12
+output_caps                  : video/x-raw,format=I420
+exit_code                    : 0
+verdict=PASS_CAPS_NEGOTIATION

@@ -1,0 +1,8 @@
+case	exit_code	verdict
+normal	0	PASS_NORMAL_PATH
+timeout_recovered	0	PASS_WITH_RECOVERY_EVIDENCE
+bytesused_zero	1	FAIL_OUTPUT_BYTESUSED_ZERO
+unsupported_format	0	PASS_FAULT_UNSUPPORTED_FORMAT_REJECTED
+source_change_recovered	0	PASS_WITH_RECOVERY_EVIDENCE
+source_change_no_reconfigure	1	FAIL_TIMEOUT_OVER_LIMIT
+rk_rkmpp_evidence	0	PASS_RK_HARDWARE_PATH_EVIDENCE

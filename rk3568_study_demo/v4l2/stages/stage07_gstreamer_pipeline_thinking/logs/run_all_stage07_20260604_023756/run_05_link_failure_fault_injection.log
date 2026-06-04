@@ -1,0 +1,16 @@
+Stage07 Demo05: intentional link failure and layer classification
+command                        : gst-launch-1.0 videotestsrc num-buffers=3 ! video/x-h264 ! fakesink sync=false
+exit_code                      : 1
+elapsed_ms                     : 97
+output_begin
+WARNING: erroneous pipeline: could not link videotestsrc0 to fakesink0, videotestsrc0 can't handle caps video/x-h264
+output_end
+classified_layer               : link_or_caps_negotiation_failure
+
+[why this failure is expected]
+videotestsrc produces raw video buffers. It cannot directly produce compressed H.264 caps.
+Correct paths need encoder/parser or a compressed file source before h264parse/decoder.
+
+[driver shadow]
+This is still user-space link/caps failure. It does not reach VPU driver ioctl path.
+verdict=PASS_EXPECTED_LINK_FAILURE

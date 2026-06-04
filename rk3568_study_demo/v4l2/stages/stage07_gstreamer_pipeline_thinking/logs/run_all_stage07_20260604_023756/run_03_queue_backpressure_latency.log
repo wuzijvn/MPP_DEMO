@@ -1,0 +1,26 @@
+Stage07 Demo03: queue backpressure and latency observation
+frames                         : 40
+slow_node_sleep_us             : 2000
+queue_depth                    : 4
+
+[without queue]
+command                        : gst-launch-1.0 -q videotestsrc num-buffers=40 ! video/x-raw,format=NV12,width=320,height=240,framerate=30/1 ! identity sleep-time=2000 ! fakesink sync=false
+exit_code                      : 0
+elapsed_ms                     : 325
+output_begin
+output_end
+
+[with queue]
+command                        : gst-launch-1.0 -q videotestsrc num-buffers=40 ! video/x-raw,format=NV12,width=320,height=240,framerate=30/1 ! queue max-size-buffers=4 max-size-bytes=0 max-size-time=0 ! identity sleep-time=2000 ! fakesink sync=false
+exit_code                      : 0
+elapsed_ms                     : 245
+output_begin
+output_end
+
+[metric meaning]
+no_queue_elapsed_ms=325
+with_queue_elapsed_ms=245
+delta_ms=-80
+A small or negative delta does not prove zero-copy or hardware acceleration.
+The key learning is where buffering and scheduling boundaries are inserted.
+verdict=PASS_QUEUE_OBSERVATION

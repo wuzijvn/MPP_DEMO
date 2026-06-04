@@ -1,0 +1,21 @@
+Stage07 Demo07: hardware backend candidate probe
+avdec_h264_rkmpp       installed=yes | Rockchip MPP/VPU path candidate; verify with dmesg, CPU, logs, and output format.
+avdec_hevc_rkmpp       installed=yes | Rockchip MPP/VPU path candidate; verify with dmesg, CPU, logs, and output format.
+avdec_vp8_rkmpp        installed=yes | Rockchip MPP/VPU path candidate; verify with dmesg, CPU, logs, and output format.
+avdec_vp9_rkmpp        installed=yes | Rockchip MPP/VPU path candidate; verify with dmesg, CPU, logs, and output format.
+mpph264enc             installed=yes | Rockchip MPP/VPU path candidate; verify with dmesg, CPU, logs, and output format.
+v4l2h264dec            installed=no | V4L2 path candidate; map caps to VIDIOC_ENUM_FMT/TRY_FMT/S_FMT and device node.
+v4l2slh264dec          installed=no | V4L2 path candidate; map caps to VIDIOC_ENUM_FMT/TRY_FMT/S_FMT and device node.
+v4l2src                installed=yes | V4L2 path candidate; map caps to VIDIOC_ENUM_FMT/TRY_FMT/S_FMT and device node.
+v4l2sink               installed=yes | V4L2 path candidate; map caps to VIDIOC_ENUM_FMT/TRY_FMT/S_FMT and device node.
+vaapih264dec           installed=no | VAAPI path candidate; map to libva, DRM render node, Mesa/driver support.
+omxh264dec             installed=no | OpenMAX path candidate; map to vendor OMX component and buffer mode.
+
+[evidence checklist]
+1. gst pipeline exits with EOS or stable streaming.
+2. selected element name is visible in command/log, not only auto-plugged guesswork.
+3. backend logs/dmesg/device node prove hardware path, or CPU usage/fallback check supports it.
+4. output caps/memory type are understood: SystemMemory, DMABuf, DRM PRIME, or vendor memory.
+5. failure report states what is proven and what is not proven.
+found_hw_candidates=7
+verdict=PASS_BACKEND_PROBE
